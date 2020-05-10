@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio1</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var imagen = 0;
+      function funcion1(){
+        imagen = (imagen+1)%3;
+        console.log(imagen);
+        document.images["imagen"].src = imagen + ".jpg";
+      }
+      function funcion2(){
+        imagen = ((imagen - 1) % 3 + 3) % 3;
+        // if(imagen < 0 )
+        //   imagen = 2
+        console.log(imagen);
+        document.images["imagen"].src = imagen + ".jpg";
+      }
+    </script>
+    <section>
+      <img src="0.jpg" name="imagen">
+      <input type="button" name="anterior" value="<-" onclick="funcion2()">
+      <input type="button" name="siguiente" value="->" onclick="funcion1()">
+    </section>
+  </body>
+</html>

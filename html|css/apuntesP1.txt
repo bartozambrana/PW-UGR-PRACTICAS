@@ -1,0 +1,21 @@
+El login es un formulario.
+
+Como se hizo, es un enlace, donde es encontrará un informe en pdf en el que se indique como lo hemos realizada.
+Aún no le podemos dar funcionalidad a acceder.
+
+En la siguiente imagen
+
+Los enlaces ALTA, BAJA Y EDICIÓN solo serán visibles para el administrador, para el resto de usuarios no. Pero para nuestro
+caso ahora aparecerá como se muestra en la imgane.
+
+En la siguiente imagen, se entra si da click en la imagen o en el título se lleva a la siguiente imagen.
+
+Seccoines tres secciones máximas, el resto son enlaces a la primera, segunda y tercera
+Bibliotecas digitales 1, y las otras dos, enlaces a la primera
+y así todo.
+
+bd1.txt tiene que ser adaptable a distintas pantallas,
+para ello ponemos una columna seguida de otra
+y ponemos la imagen y debajo el título.
+
+Aspectos inovadores como animaciones o trasformaciones a la hora de clickar a un botón, fuentes tipográficas externas.

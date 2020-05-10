@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es" >
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Bartolomé Zambrana Pérez">
+    <link rel="stylesheet" type="text/css" href="./estilos.css">
+    <title>Baja de Secci&oactue;nes</title>
+  </head>
+
+  <body>
+    <!-- Cabecera -->
+    <header>
+      <!--logo-->
+      <section class="encabezado">
+        <img src="./imagenes/logo.jpg" id="logoCabecera" alt="Logo del gestor">
+      </section>
+
+      <!--Nombre del gestor -->
+      <section class="encabezado">
+        <h1 id="tituloCabecera">Pel&iacute;culas</h1>
+      </section>
+
+      <!--Indicación de donde nos encontramos-->
+      <section class="encabezado">
+        <h2 id="subtituloCabecera">Baja de Secci&oacute;nes</h2>
+      </section>
+    </header>
+
+    <!-- Cuerpo de la página -->
+    <main>
+
+      <!--
+          Navegador por si se quiere volver a la biblioteca digital como si se quiere navegar a las distintas seccciones
+          de dicha biblioteca digital
+     -->
+      <nav id="navSecciones">
+            <a href="./bd1.html" class="enlace1">Inicio</a>
+            <a href="./recursosseccion1.html" class="enlace1">Acci&oacute;n</a>
+            <a href="./recursosseccion1.html" class="enlace1">Aventuras</a>
+            <a href="./recursosseccion1.html" class="enlace1">Ciencia Ficci&oacute;n</a>
+            <a href="./recursosseccion1.html" class="enlace1">Comedia</a>
+            <a href="./recursosseccion1.html" class="enlace1">Drama</a>
+            <a href="./recursosseccion1.html" class="enlace1">Musicales</a>
+            <a href="./recursosseccion1.html" class="enlace1">B&eacute;licas</a>
+            <a href="./recursosseccion1.html" class="enlace1">Suspense</a>
+            <a href="./recursosseccion1.html" class="enlace1">Cl&aacute;sicos</a>
+
+      </nav>
+
+      <!--
+        Sectión para establecer el contenido principal de la página web.
+      -->
+      <section>
+        <!-- Formulario para dar de baja una sección -->
+        <form id="formularioCentrado" action="ficheroPHPparaP2.php" method="post">
+          <fieldset>
+            <legend>Selecci&oacute;n de las secciones a dar de baja.</legend>
+
+            <input type="checkbox" name="Seccion1" id="Seccion1">
+            <label for="Seccion1">Ciencia Ficci&oacute;n</label><br><br>
+
+            <input type="checkbox" name="Seccion2" id="Seccion2">
+            <label for="Seccion3">Aventuras</label><br><br>
+
+            <input type="checkbox" name="Seccion3" id="Seccion3">
+            <label for="Seccion3">Comedia</label><br><br>
+
+            <input type="checkbox" name="Seccion4" id="Seccion4">
+            <label for="Seccion4">Drama</label><br><br>
+
+            <input type="checkbox" name="Seccion5" id="Seccion5">
+            <label for="Seccion5">Amor</label><br><br>
+
+            <input type="checkbox" name="Seccion6" id="Seccion6">
+            <label for="Seccion6">Musicales</label><br><br>
+
+            <input type="checkbox" name="Seccion7" id="Seccion7">
+            <label for="Seccion7">B&eacute;licas</label><br><br>
+
+            <input type="checkbox" name="Seccion8" id="Seccion8">
+            <label for="Seccion8">Suspense</label><br><br>
+
+            <input type="checkbox" name="Seccion9" id="Seccion9">
+            <label for="Seccion9">Cl&aacute;sicos</label><br><br>
+
+            <label for="motivo">Motivo de dada de baja</label><br>
+            <textarea name="motivo" id="motivo" rows="8" cols="80"></textarea>
+          </fieldset>
+          <input type="submit" name="Enviar" class="boton">
+          <input type="reset" name="Reset" class="boton">
+        </form>
+      </section>
+
+
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+      <section>
+        <h1 id="tituloPiePagina">Contacto-C&oacute;mo se hizo. </h1>
+        <p id="fondoClaroParrafoPiePagina">En el siguiente enlace puede encontrar información del desarrollador del sitio web <a href="contacto.html" class="enlace2">Contacto</a>
+          as&iacute; como se tomaron las decisiones en el proceso de desarrollo <a href="como_se_hizo.pdf" class="enlace2">C&oacute;mo se Hizo</a>
+        </p>
+      </section>
+    </footer>
+
+  </body>
+</html>

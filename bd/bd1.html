@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="author" content="Bartolomé">
+    <title>Biblioteca Digital Pel&iacute;culas</title>
+    <link rel="stylesheet" type="text/css"  href="estilos.css">
+  </head>
+  <body>
+
+    <header>
+      <section class="encabezado">
+        <img src="./imagenes/logo.jpg" id="logoCabecera" alt="Logo del gestor">
+      </section>
+
+      <!--Nombre de la Biblioteca Digital-->
+      <section class="encabezado">
+        <h1 id="tituloCabecera">Pel&iacute;culas</h1>
+      </section>
+
+
+      <section class="encabezado">
+        <h2 id="subtituloCabecera">Usuario Conectado</h2>
+      </section>
+    </header>
+    <main>
+      <!--
+          Navegador por si se quiere volver al inicio como si se quiere navegar a las distintas seccciones
+          de dicha biblioteca digital
+     -->
+      <nav id="navSecciones">
+            <a href="./index.html" class="enlace1">Inicio</a>
+            <a href="./recursosseccion1.html" class="enlace1">Acci&oacute;n</a>
+            <a href="./recursosseccion1.html" class="enlace1">Aventuras</a>
+            <a href="./recursosseccion1.html" class="enlace1">Ciencia Ficci&oacute;n</a>
+            <a href="./recursosseccion1.html" class="enlace1">Comedia</a>
+            <a href="./recursosseccion1.html" class="enlace1">Drama</a>
+            <a href="./recursosseccion1.html" class="enlace1">Musicales</a>
+            <a href="./recursosseccion1.html" class="enlace1">B&eacute;licas</a>
+            <a href="./recursosseccion1.html" class="enlace1">Suspense</a>
+            <a href="./recursosseccion1.html" class="enlace1">Cl&aacute;sicos</a>
+
+      </nav>
+
+      <!--
+        Sección primaria para dar una descripción de la biblioteca digital, así como para mostrar
+        el contenido destacado. Se le realiza una apilamiento para que se pueda mostrar junto con la sección
+        secundaria en una misma franja.
+      -->
+      <section class="apilamiento2Secciones" id="seccionPrincipal">
+        <!-- Descripción de la biblioteca digital -->
+        <article class="Cuadro50BordeMargenIzquierdo">
+          <p class="relevante">
+            En esta biblioteca digital, encontramos el conjunto de Pel&iacute;culas disponibles
+            en la plataforma Netflix, de modo que podemos encontrar la portada, as&iacute; como una breve
+            descripci&oacute;n por si se desea tener una idea sobre la pel&iacute;cula, Se puede acceder
+            a cualquier recurso destacado haciendo click sobre el t&iacute;tulo del recurso en el que se
+            tiene el inter&eacute;s.<br><br>
+
+            Las pel&iacute;culas se encuentran clasificadas por g&eacute;nero, para una mayor facilidad.
+          </p>
+        </article>
+
+        <h2 id="tituloMenuSecciones">Recursos Destacados</h2>
+        <section id="scrollbar">
+          <!--
+            Sección para acoger en su interior los contenido destacados, aplicándole el diseño
+            de un cuadro
+          -->
+          <section class="Cuadro50BordeMargenIzquierdo">
+            <!-- Primera zona que contiene la imagen del recurso -->
+            <article class="apilamiento2Secciones">
+              <img src="./imagenes/piratasDelCaribe.jpeg" alt="Peliculas" class="imagen100porcientoBordeSinSombra">
+            </article>
+            <!-- Segunda zona que contiene los enlaces así como una breve descripción -->
+            <article class="apilamiento2Secciones">
+              <a href="./recurso1.html" class="enlace3">Pitaras del Caribe: La venganza de Salazar</a>
+              <p class="textoJuntoImagen">
+                Se trata de la quinta pel&iacute;cula de la saga Piratas del Caribe, para m&aacute;s haga click
+                sobre el t&iacute;tulo.
+              </p>
+            </article>
+          </section>
+
+          <section class="Cuadro50BordeMargenIzquierdo">
+            <article class="apilamiento2Secciones">
+              <img src="./imagenes/FastAndFuriousFive.jpeg" alt="FastAndFuriousFive" class="imagen100porcientoBordeSinSombra">
+            </article>
+
+            <article class="apilamiento2Secciones">
+              <a href="./recurso2.html" class="enlace3">Fast and Furious Five</a>
+              <p class="textoJuntoImagen">
+                Se trata de la quinta pel&iacute;cula de la saga Fast and Furious, para m&aacute;s haga click
+                sobre el t&iacute;tulo.
+              </p>
+            </article>
+          </section>
+
+          <section class="Cuadro50BordeMargenIzquierdo">
+            <article class="apilamiento2Secciones">
+              <img src="./imagenes/PadreNoHayMasQueUno.jpg" alt="PadreNoHayMasQueUno" class="imagen100porcientoBordeSinSombra">
+            </article>
+
+            <article class="apilamiento2Secciones">
+              <a href="./recurso3.html" class="enlace3">Padre No Hay M&aacute;s Que Uno.</a>
+              <p class="textoJuntoImagen">
+                Se trata de la primera pel&iacute;cula de la saga Padre no hay m&aacute;s que uno, para m&aacute;s haga click
+                sobre el t&iacute;tulo.
+              </p>
+            </article>
+          </section>
+
+        </section>
+
+
+      </section>
+
+      <!-- Zona secundaria apilada con la segunda para que se encuentren en la misma franja -->
+      <section class="apilamiento2Secciones" id="seccionSecundaria">
+        <article class="Cuadro50BordeMargenIzquierdo">
+          <h2>Informaci&oacute;n general de la colecci&oacute;n.</h2>
+          <p class="relevante" id="informacionGeneralColeccion">
+            N&uacute;mero de recursos: 3. <br><br>
+            Fuentes de datos: Plataforma Netflix. <br><br>
+            &Uacute;ltima publicaci&oacute;n: Fast And Furious Five. <br><br>
+            Pr&oacute;ximas publicaciones:
+            <ul id="listaPublicaciones">
+              <li>El Se&ntilde;or de los Anillos: La Comunidad del Anillo.</li>
+              <li>El se&ntilde;or de los Anillos: Las Dos Torres.</li>
+              <li>Se&ntilde;or de los Anillos: El Retorno del Rey.</li>
+              <li>Los dos papas.</li>
+              <li>Historia de un Matrimonio.</li>
+              <li>El rey.</li>
+              <li>Fractura.</li>
+              <li>The Kissing Booth.</li>
+              <li>La lavander&iacute;a.</li>
+              <li>Solo en Casa</li>
+              <li>Kil&oacute;metro 666.</li>
+              <li>Torrente: El Brazo Tonto de la Ley.</li>
+              <li>Madagascar.</li>
+            </ul>
+          </p>
+        </article>
+
+        <aside>
+            <a href="altarecurso.html" class="enlace1">Alta</a>
+            <a href="borrarrecursos.html" class="enlace1">Baja</a>
+            <a href="editarrecurso.html" class="enlace1">Editar</a>
+            (Recursos)
+            <br><br><br>
+            <a href="altaseccion.html" class="enlace1">Alta</a>
+            <a href="borrarseccion.html" class="enlace1">Baja</a>
+            <a href="editarseccion.html" class="enlace1">Editar</a>
+            (Secciones)
+        </aside>
+
+      </section>
+
+
+    </main>
+
+    <footer>
+      <section>
+        <h1 id="tituloPiePagina">Contacto-C&oacute;mo se hizo. </h1>
+        <p id="fondoClaroParrafoPiePagina">En el siguiente enlace puede encontrar información del desarrollador del sitio web <a href="contacto.html" class="enlace2">Contacto</a>
+          as&iacute; como se tomaron las decisiones en el proceso de desarrollo <a href="como_se_hizo.pdf" class="enlace2">C&oacute;mo se Hizo</a>
+        </p>
+      </section>
+    </footer>
+
+  </body>
+</html>

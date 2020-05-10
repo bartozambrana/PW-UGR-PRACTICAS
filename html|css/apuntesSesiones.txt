@@ -1,0 +1,104 @@
+Plazo de una semana para pensar el desarrollo de una idea de práctica para desarrollarla el grupo.
+
+Css -> estilo gráfico en nuestro documento HTML
+
+Metalenguajes -> permite la creación de otros lenguajes. Mientras que un lenguaje no.
+
+Desde el punto jerárquico se ve de la siguiente forma un documento HTML
+
+                    HTML
+            Head            Body
+
+            Title       H1 Hr p
+
+             texto      texto   texto
+
+La estructura en árbol sirve para saber la ubicación de los elementos en un documento, así como aplicar métodos de árboles de forma programable,
+modificando en tiempo real un documento HTML
+
+Toda marca viene determinada por una etiqueta que abre  y cierra.
+
+<a href="texto de hiperenlace"> texto que se especifica que pinche para ir a dicho hiperenlace</a>
+
+luego la etiqueta <a>.. </a> se utiliza para establecer hiperenlaces
+
+<input> se utilzan para formularios, empleado como cuadro de texto
+mirar con más detenimiento la etiqueta <input>
+
+Utilizar la entidades para establecer vocales con acentos o ñ's
+
+lo que le sigue a los hiperenlaces también puede ser una imagen en lugar de un texto, de modo que si le pinchas en la imagen te llevará al siguiente fichero HTML
+
+también se pueden realizar hiperenlaces internos llevandonos a distintos lugares del documento. Para ello lo que tenemos que realizar identificadores como atributos de una marca
+como el ejmplo de la página 6-7 del pdf, Así como saltar a partes de otros documentos
+
+Para casa profundizar en listas ordenadas y listas no ordenadas
+
+rospand = "numero" espande dicha celda en número de dichas filas
+colspand = "numero" expande dicha celda en número de dichas columnas
+
+EJERCICIO REALIZAR LA TABLA DE NUESTRO HORARIO, metiendo coll spand y rowspand.
+
+_____________________________________________________________________  SESION 2 _______________________________________________________________________
+
+<div> </div> sirve para dividir por secciones el documento html.
+Decimos que un articulo es un <dic> dentro de otro <div>
+
+
+Titulos los realizamos con h1,h2,h3 ... titulo h1, subtitulo h2 ....
+
+Se utiliza <header> para la cabecera, se encuentra situado en el <body>
+
+<footer> utilizado para el pié de página, donde encontramos número de contacto, email ...
+
+<nav> sirve para indicar que tenemos una navegación entre distintas páginas web como si se tratara de un menú.
+
+<main> entre ella va el cuerpo del documento HTML, es única al documento, no teniendo nada que se repita en los documentos del lugar entre otras restricciones.
+       es decir que es el lugar que tiene lo único que aparece en ésta parte.
+
+<section> es utilizado cuando agrupamos contenido con una semántica similar, como en los periódicos la sección de fútbol. A su vez una sección incluye artículos
+          <article> cada uno de los contenidos independientes unos de otros.
+
+<aside> secciones laterales, utilizado para referencias a otras secciones, estando relacionado con el contenido pero no es lo principal.
+<cite> utilizado para citar a alguién o a algo
+<code> dice que a continuación hay código
+<pre> hace que tal cual como lo escribamos se ve en la página web
+<addres> permite identificar las direcciones
+<dl> lista de definiciones
+
+Cuando queramos poner algo en negrita utilizamos <strong> y <em> en cursiva
+
+Cuando queramos establecer un texto a una imagen utilizamos <figure><img ..../><figcaption>....</figcaption></figure>
+
+
+EJERCICIO PLAN DE ESTUDIO:
+
+  Se divide en 4 años
+  Así como referencias a otras referecias a otras planificaciones
+  Que tenga un header y un footer
+
+  Y una vez que lo tengamos probar el resto de elementos.
+
+  autofocus atributo que sirve para dirigir al primer campo a rellenar
+  require atributo que es obligatorio.
+
+  _____________________________________________________________________________________________________________________________________________________
+  _____________________________________________________________________________________________________________________________________________________
+  ________________________________________________________________CSS__________________________________________________________________________________
+  _____________________________________________________________________________________________________________________________________________________
+  _____________________________________________________________________________________________________________________________________________________
+  Cuando yo digo diego,digo digo y cuando digo digo digo diego.
+  _____________________________________________________________________
+
+  El atributo class sirve para especificar un conjunto de elementos sobre un nombre, permitiendo aplicarle a todos ellos una misma regla.
+  En cuanto a las reglas para aplicarles una propiedad, heredan del más general, por lo que para no conducir a error lo que debemos realizar, es
+  machacar valores en el caso de que haya pocos valores.
+
+  Para establecer negrita e itálica realizarlo mediante css
+  _____________________________________________________________________
+  REALIZAR EJERCICIO PÁGINA 6
+  _______________________________________________________________________
+
+  DISEÑO ADAPTABLE:
+
+  

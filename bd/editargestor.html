@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Bartolomé Zambrana Pérez">
+  <title>Edici&oacute;n de usuarios</title>
+  <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+
+<body>
+  <header>
+    <!--logo-->
+    <section class="encabezado">
+      <img src="./imagenes/logo.jpg" id="logoCabecera" alt="Logo del gestor">
+    </section>
+
+    <!--Nombre del gestor -->
+    <section class="encabezado">
+      <h1 id="tituloCabecera">Contenido digital Netflix</h1>
+    </section>
+
+    <!--Indicación de donde nos encontramos-->
+    <section class="encabezado">
+      <h2 id="subtituloCabecera">Edici&oacute;n de usuarios</h2>
+    </section>
+  </header>
+
+  <!-- Cuerpo -->
+  <main>
+
+
+    <!-- Navagador, en su interior hemos situado en el caso de querer acceder de Barrionuevo
+         a la página del gestor, en el futuro se podría implementar un mayor número de páginas
+         principales dedicadas al gestor y podrían ser enlazadas en el interior de esta zona.
+    -->
+    <nav>
+      <a href="./gestorbd.html" class="enlace1">Inicio</a>
+    </nav>
+
+
+    <!-- Sección para establecer el contenido principal de la página web -->
+    <section id="seccionCentrada">
+      <form id="formulario" action="ficheroPHPparaP2.php" method="post">
+        <fieldset >
+          <legend>Usuarios a editar</legend>
+
+          <datalist id="usuarioEdicion">
+            <option value="Jose Antonio Perea Martinez, DNI: 11111111A">
+            <option value="Antonio Zambrana Ruiz, DNI: 22222222B">
+            <option value="Miguel Ángel Zambrana Ruiz, DNI: 33333333C">
+            <option value="Andrés Martinez Cano, DNI: 44444444D">
+            <option value="Luis P&eacute;rez Utrera, DNI: 55555555E">
+            <option value="Ana L&oacute;pez P&eacute;rez, DNI: 26517289N">
+            <option value="Ignacio Barrionuevo Gonzalez, DNI: 26504270J">
+          </datalist>
+          <label for="usuarioSeleccionado">Selecciona el usuario a editar</label>
+          <input type="text" id="usuarioSeleccionado" name="usuarioSeleccionado" list="usuarioEdicion" /><br><br>
+
+        </fieldset>
+        <fieldset id="espaciadoFieldset">
+          <legend>Datos personales a editar</legend>
+
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" /><br><br>
+
+          <label for="ciudad,provincia">Ciuada, provincia *</label>
+          <input type="text" id="ciudad,provincia" name="ciudad,provincia" required /><br><br>
+
+          <label for="telefono">Tel&eacute;fono de contacto *</label>
+          <input type="tel" id="telefono" name="telefono" required /><br><br>
+
+          <label for="fax">Fax </label>
+          <input type="text" id="fax" name="fax" /><br><br>
+
+          <label for="postal">C&oacute;digo Postal *</label>
+          <input type="number" id="postal" name="postal" required /><br><br>
+        </fieldset>
+
+        <button type="submit" name="Enviar" class="boton">Enviar</button>
+        <button type="reset" name="Borrar" class="boton">Borrar</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <section>
+      <h1 id="tituloPiePagina">Contacto-C&oacute;mo se hizo. </h1>
+      <p id="fondoClaroParrafoPiePagina">En el siguiente enlace puede encontrar información del desarrollador del sitio web <a href="contacto.html" class="enlace2">Contacto</a>
+        as&iacute; como se tomaron las decisiones en el proceso de desarrollo <a href="como_se_hizo.pdf" class="enlace2">C&oacute;mo se Hizo</a>
+      </p>
+    </section>
+  </footer>
+</body>
+
+</html>

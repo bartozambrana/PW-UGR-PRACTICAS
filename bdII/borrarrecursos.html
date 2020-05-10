@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="author" content="Bartolomé Zambrana Pérez">
+  <title>Borrado Recursos</title>
+  <link rel="stylesheet" type="text/css" href="estilos.css">
+</head>
+
+<body>
+  <header>
+    <!--logo-->
+    <section class="encabezado">
+      <img src="./imagenes/logo.jpg" id="logoCabecera" alt="Logo del gestor">
+    </section>
+
+    <!--Nombre del gestor -->
+    <section class="encabezado">
+      <h1 id="tituloCabecera">Pel&iacute;culas</h1>
+    </section>
+
+    <!--Indicación de donde nos encontramos-->
+    <section class="encabezado">
+      <h2 id="subtituloCabecera">Borrado Recursos</h2>
+    </section>
+  </header>
+
+  <!-- Cuerpo -->
+  <main>
+
+
+    <!--
+         Navegador por si se quiere ir de nuevo a la página principal de la biblioteca
+         digital, así como a las distintas secciones
+  -->
+    <nav id="navSecciones">
+          <a href="./bd1.html" class="enlace1">Inicio</a>
+          <a href="./recursosseccion1.html" class="enlace1">Acci&oacute;n</a>
+          <a href="./recursosseccion1.html" class="enlace1">Aventuras</a>
+          <a href="./recursosseccion1.html" class="enlace1">Ciencia Ficci&oacute;n</a>
+          <a href="./recursosseccion1.html" class="enlace1">Comedia</a>
+          <a href="./recursosseccion1.html" class="enlace1">Drama</a>
+          <a href="./recursosseccion1.html" class="enlace1">Musicales</a>
+          <a href="./recursosseccion1.html" class="enlace1">B&eacute;licas</a>
+          <a href="./recursosseccion1.html" class="enlace1">Suspense</a>
+          <a href="./recursosseccion1.html" class="enlace1">Cl&aacute;sicos</a>
+
+    </nav>
+
+    <!-- Sección que contiene el contenido principal de la página web -->
+    <section >
+      <form id="formularioCentrado" action="ficheroPHPparaP2.php" method="post">
+        <fieldset id="espaciadoFieldset">
+          <legend>Selecci&oacute;n de los usuarios a dar de baja.</legend>
+
+          <input type="checkbox" name="Recurso1" id="Recurso1">
+          <label for="Recurso1">Piratas del Caribe: La vengaza de Salazar</label><br><br>
+
+          <input type="checkbox" name="Recurso2" id="Recurso2">
+          <label for="Recurso2">Fast And Furious 5.</label><br><br>
+
+          <input type="checkbox" name="Recurso3" id="Recurso3">
+          <label for="Recurso3">Padre no hay nada m&aacute;s que uno.</label><br><br>
+
+          <label for="motivo">Motivo de dada de baja</label><br>
+          <textarea name="motivo" id="motivo" rows="8" cols="80"></textarea>
+        </fieldset>
+        <input type="submit" name="Enviar" class="boton">
+        <input type="reset" name="Reset" class="boton">
+      </form>
+    </section>
+
+  </main>
+
+  <!-- Pie de página -->
+  <footer>
+    <section>
+      <h1 id="tituloPiePagina">Contacto-C&oacute;mo se hizo. </h1>
+      <p id="fondoClaroParrafoPiePagina">En el siguiente enlace puede encontrar información del desarrollador del sitio web <a href="contacto.html" class="enlace2">Contacto</a>
+        as&iacute; como se tomaron las decisiones en el proceso de desarrollo <a href="como_se_hizo.pdf" class="enlace2">C&oacute;mo se Hizo</a>
+      </p>
+    </section>
+  </footer>
+</body>
+
+</html>

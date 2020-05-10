@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio1</title>
+  </head>
+  <body>
+    <section>
+      <p>P&aacute;rrafo a)</p>
+      <p>P&aacute;rrafo b)</p>
+      <p>P&aacute;rrafo c)</p>
+      <p>P&aacute;rrafo d)</p>
+
+      <script type="text/javascript">
+
+        let conjuntoElementos = document.getElementsByTagName("*");
+        let contador = {};
+
+        for(let i  = 0; i < conjuntoElementos.length; i++ ){
+          let elemento = conjuntoElementos[i].tagName;
+          if(Object.keys(contador).indexOf(elemento) < 0){
+            contador[elemento] = 1;
+          }else{
+            contador[elemento]++;
+          }
+
+        }
+
+        document.write('<table>');
+        for(let x in contador){
+          document.write('<tr> <td>' + x + '</td> <td>' + contador[x] + '</td></tr>')
+        }
+        document.write('</table>');
+        
+      </script>
+
+    </section>
+
+
+  </body>
+</html>

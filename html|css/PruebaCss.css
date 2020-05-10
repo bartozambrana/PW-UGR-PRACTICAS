@@ -1,0 +1,47 @@
+#negrita {
+  font-weight: bold;
+  font-style: italic;
+}
+
+p {
+  background-color: blue;
+  color: white;
+}
+
+article {
+  background-color: green;
+  color: white;
+}
+
+.clasePrueba {
+  background-color: red;
+  color: white;
+}
+
+body {
+  background:#ffffff url('img/mulhacenNevado.jpg') no-repeat right top;
+}
+
+a:link {color:#FF0000;text-decoration:none;}
+a:visited {color: green; text-decoration: none;}
+a:hover {text-decoration:underline;}
+a:active {text-decoration:underline;}
+
+ol.a{
+  list-style-type: upper-roman;
+  list-style-position: outside;
+}
+
+ol.b {
+  list-style-type: lower-alpha;
+}
+
+table{
+  border-style: solid;
+  font-size: 2em;
+  border-width: 5px;
+  border-spacing: 10px 5px;
+  border-color: blueviolet;
+  padding: 20px 10px 20px 10px;
+
+}

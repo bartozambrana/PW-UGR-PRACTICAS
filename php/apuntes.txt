@@ -1,0 +1,78 @@
+Para ver el código fuente de php que hay en una página, ¿Podemos ver el código
+php dentro de un fichero html?
+
+No podemos verlo, puesto que cuando nos llega el documento devuelto del servidor
+únicamente vemos el resultado en html del código.
+
+
+PHP ( PHP Hypertext Processor), en su concepción es un lenguaje de programación general
+pero que se llegó a utilizar para el desarrollo del contenido web, en el lado del servidor
+del mismo modo que javaScript es utilizado para el lado del cliente.
+
+El código php se alberga entre <?php .... ?>  y se encuentra entre el código html
+en un fichero de extensión .php
+Las sentencias php terminan con putno y coma.
+
+<?php
+/* Esto son unos ejemplos de la sentencia echo. */
+echo "Hola, caracola", 134; sale Hola, caracola 134
+echo "Adiós ", "Bye"; // sale Adiós Bye
+echo '<p>Nueva \n linea</p>'; //no produce el salto de liínea
+# Comentario de una línea.
+echo "<p>Nueva <br/>\n linea </p>";
+?>
+
+
+print_r($variable); mostramos valor del nombre.
+al igual que echo $variable
+& -> da el espacio de memoria.
+
+Hemos de ver la diferencia entre la función var_dump(&variable) y gettype(&variable);
+
+number_format(numéro, numerodedecimales, sepearador de miles)
+permite establecer el formato a los números que queramos. Por defecto tiene
+el formato anglosajón
+
+Realizar dos documentos html con extensión php
+
+Diferencias entre comillas simples y dobles
+las dobles muestra tal cual el código
+mientras que las simples sirven para dar el valor que contiene una variable
+
+
+error_log("Se ha producido un error en la condición",3,"/temp/err_log");
+guarda el error en el fichero /temp/err_logg
+
+establecer el error_reporting(0), cuando se encuentre en producción
+
+REALIZAR EJERCICIO DE MANEJO DE ERRORES:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EJERCICIO 2:
+
+Si alguno de los campos a rellenar no ha sido rellenado hemos de volver a enviarle el Formulario
+poniendo los valores en los campos correctos para que el usuario no vuelva a introducirlos.
+
+EJERCICIO3:
+Introducimos cada campo uno a uno y los vamos enviando y una vez que envíe el campo último
+hemos de mostrar todos los campos del formulario relleno.
+
+Luego tenemos el formulario completo, luego la primera vez mostramos el el primer campo y el resto
+a hidden 

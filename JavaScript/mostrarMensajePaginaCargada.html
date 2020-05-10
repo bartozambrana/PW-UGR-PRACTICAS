@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio1</title>
+  </head>
+  <body>
+    <section>
+      <p>P&aacute;rrafo a)</p>
+      <p>P&aacute;rrafo b)</p>
+      <p>P&aacute;rrafo c)</p>
+      <p>P&aacute;rrafo d)</p>
+    </section>
+
+      <script type="text/javascript">
+        let parrafos  = document.getElementsByTagName("p");
+
+        for(let i = 0; i < parrafos.length; i++){
+          parrafos[i].innerHTML = "Hola" + i;
+          parrafos[i].style.color = "Green";
+        }
+      </script>
+
+      <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function(event) {
+        alert("Página cargada");
+        });
+
+      </script>
+
+  </body>
+</html>

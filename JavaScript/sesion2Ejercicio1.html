@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <title>Ejercicio1</title>
+  </head>
+  <body>
+      <script type="text/javascript">
+        let tabla  = document.createElement("table");
+
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+
+        let tr1 = document.createElement("tr");
+        let tr2 = document.createElement("tr");
+
+
+        let texto1 = document.createTextNode(" Fila1 Columna1");
+        let texto2 = document.createTextNode(" Fila1 Columna2");
+        let texto3 = document.createTextNode(" Fila2 Columna1");
+        let texto4 = document.createTextNode(" Fila2 Columan2");
+
+
+        td1.appendChild(texto1);
+        td2.appendChild(texto2);
+        td3.appendChild(texto3);
+        td4.appendChild(texto4);
+
+        tr1.appendChild(td1);
+        tr1.appendChild(td2);
+
+        tr2.appendChild(td3);
+        tr2.appendChild(td4);
+
+        tabla.appendChild(tr1);
+        tabla.appendChild(tr2);
+
+        //Escribimos el elemento en el <body>
+
+        document.getElementsByTagName("body")[0].appendChild(tabla);
+      </script>
+    </section>
+  </body>
+</html>

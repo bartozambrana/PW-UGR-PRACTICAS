@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8">
+  <title>XX Congreso Alimentaci&ocaute;n Jaen</title>
+</head>
+
+<body>
+  <header align="center">
+    <h1>Inscripci&oacute;n al XX Congreso de Alimentaci&oacute;n de Ja&eacute;n <br> 09 de septiembre de 2020</h1>
+  </header>
+
+  <main>
+    <section align="center">
+      <h2>Precios de entradas</h2>
+      <table border="1" align="center">
+        <caption>"Precios / Tipos de entradas"</caption>
+
+        <thead>
+          <tr>
+            <th colspan="4">Entradas XX congreso de Alimentacion Ja&eacute;n</th>
+          </tr>
+
+        </thead>
+
+        <tbody>
+          <tr>
+            <th>Opciones</th>
+            <th>Registro temprano</th>
+            <th>Registro tard&iacute;o</th>
+            <th>Registro durante el evento</th>
+          </tr>
+          <tr>
+            <th>Profesionales</th>
+            <td>15€</td>
+            <td>20€</td>
+            <td>30€</td>
+          </tr>
+          <tr>
+            <th>Estudiantes</th>
+            <td>10€</td>
+            <td>15€</td>
+            <td>20€</td>
+          </tr>
+        </tbody>
+
+      </table>
+    </section>
+
+    <section align="center">
+      <aside>
+        <h2>Inscripci&oacute;n</h2>
+        <p>
+          Para realizar la Inscripci&oacute;n al XX Congreso de Alimentaci&oacute;n de Ja&eacute;n
+          se puede llevar a cabo realizando el siguiente formulario.<br>
+
+          En caso de necesidad de cosulta basta con contactar con el siguiente correo electr&oacute;nico:
+          <a href="mailto:mailto:congesalimentosjaen@congresjaen.com">congesalimentosjaen@congresjaen.com</a> <br>
+          o mediante el siguiente enlace <a href="/home/mipc/Escritorio/UNIVERSIDAD/TERCERO CARRERA/SegundoCuatrimestre/PW/Prácticas/P1/actividadHorario.html">
+            pincha aqu&iacute;</a> ,accediendo a la secci&oacute;n de ayuda al cliente.
+        </p>
+      </aside>
+    </section>
+
+    <section>
+      <form action="bartozambrana@correo.ugr.es!&subject=formulario" enctype="text/plain" name="formularioAlimentacion" method="post">
+
+        <fieldset>
+          <legend>Datos Personales</legend>
+
+          <label for="nombre">Nombre *</label>
+          <input type="text" id="nombre" name="nombre" required /><br><br>
+
+          <label for="apellidos">Apellidos *</label>
+          <input type="text" id="apellidos" name="apellidos" required /><br><br>
+
+          <label for="fechaNacimiento">Fecha de nacimiento *</label>
+          <input type="date" id="fechaNacimiento" name="fechaNacimiento" required /><br><br>
+
+          <label for="DNI">DNI *</label>
+          <input type="text" id="DNI" name="DNI" maxlength="9" required /><br><br>
+          <!--Establecemos máxima longitud nueve puesto que es el tamaño del DNI -->
+          <label for="email">Email *</label>
+          <input type="text" id="email" name="email" required /><br><br>
+
+          <label for="ciudad,provincia">Ciuada, provincia *</label>
+          <input type="text" id="ciudad,provincia" name="ciudad,provincia" required /><br><br>
+
+          <label for="telefono">Tel&eacute;fono de contacto *</label>
+          <input type="number" id="telefono" name="telefono" required /><br><br>
+
+          <label for="fax">Fax </label>
+          <input type="text" id="fax" name="fax" /><br><br>
+
+          <label for="postal">C&oacute;digo Postal *</label>
+          <input type="number" id="postal" name="postal" required /><br><br>
+
+          <label for="acompañantes">N&uacute;mero de acompa&ntilde;antes *</label>
+          <input type="number" id="acompañantes" name="acompañantes" required />
+
+
+        </fieldset>
+
+        <br><!-- Establecemos una mayor distancia entre partes del formulario -->
+        <fieldset>
+          <legend>Tipo de Entrada</legend>
+          <label for="listaDesplegable">Seleccione el tipo de entrada</label>
+          <select id="listaDesplegable">
+            <option value="Estudiante">Estudiante</option>
+            <option value="Profesional">Profesional</option>
+          </select>
+
+          <br><br>
+
+          <label for="credencialUniversitaria">Si es estudiante, aporte su credencial universitaria: </label>
+          <input type="password" id="credencialUniversitaria" name="credencialUniversitaria">
+        </fieldset>
+
+        <br> <!-- Establecemos una mayor distancia entre partes del formulario -->
+
+        <fieldset>
+          <legend>Otros datos adicionales:</legend>
+
+          <p>
+            ¿Es tu primera asistencia al congreso? *
+            <label for="si">Si</label>
+            <input type="radio" id="si" name="si" value="si" checked />
+            <label for="no">No</label>
+            <input type="radio" id="no" name="no" value="no" />
+          </p>
+
+          <datalist id="conocerEvento">
+            <option value="Mediante un amigo">
+            <option value="Mediante redes sociales">
+            <option value="Mediante la divulgaci&oacute;n local">
+            <option value="Otra opci&oacute;n">
+          </datalist>
+          <label for="conocimientoEvento">¿Cómo conoci&oacute; el evento?</label>
+          <input type="text" id="conocimientoEvento" name="conocimientoEvento" list="conocerEvento" />
+
+        </fieldset>
+        <p>Aquellos campos que contienen * son obligatorios </p>
+
+
+        <!--Botón para procesar los datos -->
+        <input type="submit" id="button1" value="Procesar Datos" />
+        <!--Botón para reiniciar el formulario-->
+        <input type="reset" id="button2" value="Reiniciar Formulario" />
+      </form>
+
+    </section>
+
+
+
+  </main>
+  <footer>
+    <h2 align="center">Organizadores del congreso</h2>
+    <p>
+
+      En este apartado encuentra informaci&oacute;n acerca los organizadores del torneo, mediante el enlace mostrado a continuaci&oacute;n <br>
+      Permitirá ponerse en contacto con los organizadores
+      <a href="pradogrado1920.ugr.es">Informaci&oacute;n adicional sobre organizadores</a>
+    </p>
+
+    <p>
+
+      Posted by: Bartolom&eacute; Zambrana,
+      Contact information: <a href="mailto:bartozambrana@correo.ugr.es"> bartozambrana@correo.ugr.es </a>.
+    </p>
+
+  </footer>
+</body>
+
+</html>

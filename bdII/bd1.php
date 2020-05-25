@@ -165,14 +165,14 @@
                 '</article>';
           if(isset($_SESSION['usuario'])){
             echo '<aside>' . 
-                    '<a href="altarecurso.html" class="enlace1">Alta</a>
-                    <a href="borrarrecursos.html" class="enlace1">Baja</a>
-                    <a href="editarrecurso.html" class="enlace1">Editar</a>
+                    '<a href="altarecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                    <a href="borrarrecursos.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
+                    <a href="editarrecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
                     (Recursos)
                     <br><br><br>
-                    <a href="altaseccion.html" class="enlace1">Alta</a>
-                    <a href="borrarseccion.html" class="enlace1">Baja</a>
-                    <a href="editarseccion.html" class="enlace1">Editar</a>
+                    <a href="altaseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                    <a href="borrarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
+                    <a href="editarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
                     (Secciones)
                 </aside>';
           } 

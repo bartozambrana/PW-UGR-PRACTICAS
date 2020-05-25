@@ -12,14 +12,17 @@
 
   //Intentamos realizar la consulta.
   try{
-    $sql = "SELECT usuario FROM " . USUARIOS . " WHERE usuario = :nick AND password = :contrasenia";
+    $sql = "SELECT usuario,email,telf,date_format(fNacimiento, '%d/%m/%Y') fNacimiento  FROM " . USUARIOS . " WHERE usuario = :nick AND password = :contrasenia";
     $sentencia = $conexion->prepare($sql);
   	$sentencia->bindValue(":nick",$usuario);
   	$sentencia->bindValue(":contrasenia", $contrasenia);
   	$sentencia->execute();
-    
-  	if(!empty($sentencia->fetch())){
+    $resultado = $sentencia->fetch();
+  	if(!empty($resultado)){
       $_SESSION['usuario'] = $usuario;
+      $_SESSION['email'] = $resultado['email'];
+      $_SESSION['telefono'] = $resultado['telf'];
+      $_SESSION['fechaNacimiento'] = $resultado['fNacimiento'];
   		header("Location: gestorbd.php");
   	}
   	else{

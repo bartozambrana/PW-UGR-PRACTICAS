@@ -22,7 +22,12 @@
 
     <!--Indicación de donde nos encontramos-->
     <section class="encabezado">
-      <h2 id="subtituloCabecera">Borrado de Bibliotecas Digitales</h2>
+      <h2 id="subtituloCabecera">
+        <?php 
+            if(isset($_GET["bibliotecaBorrar"])) //Comprobamos si se encuentra la variable
+              echo 'Borrado de la Biblioteca Digital '.$_GET["bibliotecaBorrar"];
+        ?>
+      </h2>
     </section>
   </header>
 
@@ -31,7 +36,7 @@
 
       <!-- Navegador por si se quiere volver al inicio del todo -->
     <nav>
-      <a href="./gestorbd.html" class="enlace1">Inicio</a>
+      <a href="./gestorbd.php" class="enlace1">Inicio</a>
     </nav>
 
     <!-- Sección que contiene el contenido principal -->
@@ -39,18 +44,42 @@
       <!-- Primera zona dediaca a la introducción de la información de la biblioteca -->
       <article>
         <h2 id="tituloGeneral">Datos Biblioteca Digital a eliminar</h2>
-        <p class="relevante">
-          Titulo: Pel&iacute;culas. <br>
-          Fecha de Alta: 09/09/2018. <br>
-          Fecha de Finalizaci&oacute;n: 09/09/2030. <br>
-        </p>
+        <?php 
+          require_once("configuracion.php");
+          require_once("conexion.php");
+          require_once("tratamientoCadenas.php");
+
+          $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabaja, descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
+          $sentencia = $conexion->prepare($sql);
+          $sentencia->bindValue(":nombre",quitarAcentos($_GET["bibliotecaBorrar"]) );
+          $sentencia->execute();
+
+          $resultado = $sentencia->fetchAll();
+          foreach($resultado as $fila){
+            echo'<p class="relevante">
+                  <ul>
+                    <li>Nombre de la biblioteca digital: '. $fila["nombre"] . '</li>
+                    <li>Fecha de alta de la biblioteca digital: '. $fila["fechaalta"] .'</li>
+                    <li>Fecha de baja de la biblioteca digital: '. $fila["fechabaja"] .'</li>
+                    <li>Descripcion: ' .$fila["descripcion"] . '</li>
+                    
+                   </ul>
+                  </p>  ';
+          }
+          $conexion = null;
+
+        ?>
 
       </article>
       <!-- Segunda zona dedicado al formulario de borrado de la biblioteca -->
       <article>
-        <form id="formulario" action="ficheroPHPparaP2" method="post">
+        <form id="formulario" action="procesarBorradoBD.php" method="post">
           <label for="motivoDeBorrado">Introduzca el motivo de borrado: </label> <br>
-          <textarea name="nameid="tituloGeneral"" rows="8" cols="80" id="motivoDeBorrado"></textarea>
+          <textarea rows="8" cols="80" id="motivoDeBorrado"></textarea>
+          
+          <!-- Para saber que biblioteca hay que -->
+          <input type="hidden" name="nombreBD" id="nombreBD" value="<?php echo quitarAcentos($_GET["bibliotecaBorrar"]); ?>">
+
           <input type="submit" name="Enviar" class="boton">
           <input type="reset" name="Reset" class="boton">
         </form>

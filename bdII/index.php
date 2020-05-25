@@ -6,6 +6,7 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <title>Biblioteca digital Netflix</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
+  <script type="text/javascript" src="./validacion.js"></script>
 </head>
 
 <body>
@@ -26,19 +27,6 @@
 
     <!--Login-->
     <section class="encabezado">
-      <!--
-      <form id="formularioLogin" method="post" action="login.php">
-
-        <label for="usuario" id="enunciadoUsuario">Usuario </label><br>
-        <input type="text" name="usuario" id="usuario" ><br><br>
-
-        <label for="password" id="enunciadoPassword">Contrase&ntilde;a</label><br>
-        <input type="text" name="password" id="password"><br><br>
-
-        <-- Lo realizamos de esta forma para establecer el comportamiento del boton del formulario --
-        <input type="submit" class="boton" value="Enviar" />
-
-      </form>-->
       <?php 
         require_once("loginMensajeValidacion.php");
         formularioLogin();
@@ -73,7 +61,7 @@
                     </article>
   
                     <article class="apilamiento2Secciones">
-                        <a href="./bd1_usuarios.html" class="enlace6">'. $fila["nombre"] .'</a><br>
+                        <a href="./bd1.php?bd='.$fila["nombre"].'" class="enlace6">'. $fila["nombre"] .'</a><br>
                     </article>
                   </section>';
           }

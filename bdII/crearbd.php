@@ -6,10 +6,14 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <title>Crear BD</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
+  <script type="text/javascript" src="./validacion.js"></script>
 </head>
 
 <body>
 
+  <?php 
+    session_start();
+  ?>
   <!-- Cabecera -->
   <header>
     <!--logo-->
@@ -24,7 +28,7 @@
 
     <!--Zona en la que nos encontramos-->
     <section class="encabezado">
-      <h2 id="subtituloCabecera">Creaci&oacute;n de biblioteca digital</h2>
+      <h2 id="subtituloCabecera"><?php echo $_SESSION['usuario']?></h2>
     </section>
   </header>
   <!-- Cuerpo de la página -->
@@ -35,36 +39,36 @@
          principales dedicadas al gestor y podrían ser enlazadas en el interior de esta zona.
     -->
     <nav>
-      <a href="./gestorbd.html" class="enlace1">Inicio</a>
+      <a href="./gestorbd.php" class="enlace1">Inicio</a>
     </nav>
     
     <!-- Zona princiapl de la página web-->
     <section>
-      <form id="formularioCentrado" action="ficheroPHPparaP2.php" method="post">
+      <form id="formularioCentrado" action="procesarCrearBD.php" method="post" name="formularioCrearBD" onsubmit="return validarCrearBD();" enctype="multipart/form-data">
 
         <fieldset >
           <legend>Datos Biblioteca Digital.</legend>
           <article class="apilamiento2Secciones">
-            <input type="file" name="fotoBD" class="boton" id="seleccionImagenBD" required>
+            <input type="file" name="seleccionImagenBD" class="boton" id="seleccionImagenBD" >
           </article>
 
           <article class="apilamiento2Secciones">
             <label for="titulo">Titulo *</label>
-            <input type="text" id="titulo" name="titulo" required /><br><br>
+            <input type="text" id="titulo" name="titulo" /><br><br>
 
             <label for="fechaDeAlta">Fecha de Alta *</label>
-            <input type="date" id="fechaDeAlta" name="fechaDeAlta" required /><br><br>
+            <input type="date" id="fechaDeAlta" name="fechaDeAlta"  /><br><br>
 
             <label for="fechaFinalizacionAlta">Fecha de finalizaci&oacute;n *</label>
-            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" required /><br><br>
+            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta"  /><br><br>
           </article>
           <article>
             <label for="Descripcion">Descripci&oacute;n *</label> <br><br>
-            <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" required></textarea>
+            <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" ></textarea>
           </article>
 
         </fieldset>
-        <input type="submit" name="Enviar" class="boton">
+        <input type="submit" name="Enviar" class="boton" onclick="return validarCrearBD();">
         <input type="reset" name="Reset" class="boton">
       </form>
     </section>

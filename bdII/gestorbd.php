@@ -38,48 +38,42 @@
 
     <!-- Zona de la imagen representantiva del gestor -->
     <section class="apilamiento2Secciones">
-      <a href="./crearbd.html" id="enlaceCrearBibliotecaDigital">Crear Biblioteca Digital</a>
+      <a href="./crearbd.php" id="enlaceCrearBibliotecaDigital">Crear Biblioteca Digital</a>
     </section>
 
     <!-- Zona de lista de bibliotecas -->
     <section class="apilamiento2Secciones">
       <section id="scrollbar">
-        <h2>Bibliotecas dadas de alta</h2>
-        <section class="Cuadro50BordeMargenIzquierdo">
-          <article class="apilamiento2Secciones">
-            <img src="./imagenes/peliculas.jpg" alt="Peliculas" class="imagen100porcientoBordeSinSombra">
-          </article>
+      <h2>Bibliotecas dadas de alta</h2>
+      <?php 
+          //obtenemos las bibliotecas digitales de la base de datos. 
+          require_once("configuracion.php");
+          require_once("conexion.php");
+          
+          $sql = "SELECT * FROM ". BIBLIOTECAS_DIGITALES;
+          $resultadoConsulta = $conexion->query($sql);
 
-          <article class="apilamiento2Secciones">
-              <a href="./bd1.html" class="enlace6">Pel&iacute;culas</a><br>
-              <a href="borrarbd.html" class="enlaceBorrar">Borrar</a>
-              <a href="editarbd.html" class="enlaceEditar">Editar</a>
-          </article>
-        </section>
+          foreach($resultadoConsulta as $fila){
+            echo '<section class="Cuadro50BordeMargenIzquierdo">
+                    <article class="apilamiento2Secciones">
+                      <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra">
+                    </article>
+  
+                    <article class="apilamiento2Secciones">
+                        <a href="./bd1.php?bd='.$fila["nombre"].'" class="enlace6">'. $fila["nombre"] .'</a><br>';
+            if(isset($_SESSION['usuario'])){
+              echo '    <a href="./borrarbd.php?bibliotecaBorrar='.$fila["nombre"].'" class="enlaceBorrar">Borrar</a>
+                        <a href="./editarbd.php?bibliotecaEditar='.$fila["nombre"].'" class="enlaceEditar">Editar</a>
+                      </article>
+                    </section>';
+            }else{
+              echo '  </article>
+                    </section>';
+            }
+          }
 
-        <section class="Cuadro50BordeMargenIzquierdo">
-          <article class="apilamiento2Secciones">
-            <img src="./imagenes/series.jpg" alt="Series" class="imagen100porcientoBordeSinSombra">
-          </article>
-
-          <article class="apilamiento2Secciones">
-              <a href="./bd1.html" class="enlace6">Series</a><br>
-              <a href="borrarbd.html" class="enlaceBorrar">Borrar</a>
-              <a href="editarbd.html" class="enlaceEditar">Editar</a>
-          </article>
-        </section>
-
-        <section class="Cuadro50BordeMargenIzquierdo">
-          <article class="apilamiento2Secciones">
-            <img src="./imagenes/documentales.jpg" alt="Documentales" class="imagen100porcientoBordeSinSombra">
-          </article>
-
-          <article class="apilamiento2Secciones">
-              <a href="bd1.html" class="enlace6">Documentales</a><br>
-              <a href="borrarbd.html" class="enlaceBorrar">Borrar</a>
-              <a href="editarbd.html" class="enlaceEditar">Editar</a>
-          </article>
-        </section>
+          $conexion = null;
+        ?>
       </section>
     </section>
 

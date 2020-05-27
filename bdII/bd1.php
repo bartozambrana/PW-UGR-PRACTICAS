@@ -129,7 +129,7 @@
                           </article>
                           <!-- Segunda zona que contiene los enlaces así como una breve descripción -->
                           <article class="apilamiento2Secciones">
-                            <a href="./recurso.php?bd= '. $_GET["bd"] .'?seccion='. $resultado[$i]['seccion'] .'" class="enlace3">'. $resultado[$i]['nombre'] .'</a>
+                            <a href="./recurso.php?bd='. $_GET["bd"] .'&seccion='. $resultado[$i]['seccion'] .'&recurso='. $resultado[$i]['nombre'] .'" class="enlace3">'. $resultado[$i]['nombre'] .'</a>
                           </article>
                         </section>';
                         $contador++;

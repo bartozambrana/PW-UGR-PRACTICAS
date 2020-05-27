@@ -8,6 +8,9 @@
   </head>
 
   <body>
+    <?php 
+      session_start();
+    ?>
     <!-- Cabecera -->
     <header>
       <!--logo-->
@@ -17,12 +20,22 @@
 
       <!--Nombre del gestor -->
       <section class="encabezado">
-        <h1 id="tituloCabecera">Pel&iacute;culas</h1>
+        <h1 id="tituloCabecera">
+          <?php 
+            if(isset($_GET['bd'])){
+              require_once("tratamientoCadenas.php"); 
+              echo $_GET['bd']; 
+            }  
+          ?>
+        </h1>
       </section>
 
       <!--Indicación de donde nos encontramos-->
       <section class="encabezado">
-        <h2 id="subtituloCabecera">Alta de Recurso</h2>
+        <?php 
+          require_once("loginMensajeValidacion.php");
+          formularioLogin();
+        ?>
       </section>
     </header>
 
@@ -34,23 +47,38 @@
      -->
 
       <nav id="navSecciones">
-            <a href="./bd1.html" class="enlace1">Inicio</a>
-            <a href="./recursosseccion1.html" class="enlace1">Acci&oacute;n</a>
-            <a href="./recursosseccion1.html" class="enlace1">Aventuras</a>
-            <a href="./recursosseccion1.html" class="enlace1">Ciencia Ficci&oacute;n</a>
-            <a href="./recursosseccion1.html" class="enlace1">Comedia</a>
-            <a href="./recursosseccion1.html" class="enlace1">Drama</a>
-            <a href="./recursosseccion1.html" class="enlace1">Musicales</a>
-            <a href="./recursosseccion1.html" class="enlace1">B&eacute;licas</a>
-            <a href="./recursosseccion1.html" class="enlace1">Suspense</a>
-            <a href="./recursosseccion1.html" class="enlace1">Cl&aacute;sicos</a>
+        <?php 
+          if(isset($_SESSION['usuario'])){
+            echo '<a href="./gestorbd.php" class="enlace1">Inicio</a>';
+          }else{
+            echo '<a href="./index.php" class="enlace1">Inicio</a>';
+          }
+          require_once("configuracion.php");
+          require_once("conexion.php");
+          try{
+            $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+            $sentencia->execute();
+  
+            $resultado = $sentencia->fetchAll();
+            foreach($resultado as $fila){
+              echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '&empieza=0' .'" class="enlace1">' . $fila['nombre'] . '</a>';
+  
+            }
+            
+          }catch(PDOException $e){
+            echo $e;
+            $conexion = null;
+          }
+        ?>
       </nav>
       <!--
         Sectión para establecer el contenido principal de la página web.
       -->
       <section>
         <!-- Formulario para dar de alta a un recurso -->
-        <form id="formularioCentrado" action="ficheroPHPparaP2.php" method="post">
+        <form id="formularioCentrado" action="procesarAltaRecurso.php" method="post">
 
           <fieldset>
             <legend>Datos Recurso</legend>
@@ -63,48 +91,38 @@
             </article>
 
             <article class="apilamiento2Secciones">
-              <label for="Titulo">Titulo: *</label>
-              <input type="text" id="titulo" name="titulo" required /><br><br>
-
-              <label for="autor">Autor: *</label>
-              <input type="text" id="autor" name="autor" required /><br><br>
+              <label for="nombre">Nombre: *</label>
+              <input type="text" id="nombre" name="nombre" required /><br><br>
 
               <datalist id="seleccionSeccion">
-                <option value="Ciencia Ficci&oacute;n">
-                <option value="Aventuras">
-                <option value="Comedia">
-                <option value="Drama">
-                <option value="Acci&oacute;n">
-                <option value="Musicales">
-                <option value="B&eacute;licas">
-                <option value="Suspense">
-                <option value="Cl&aacute;sicos">
+                <?php 
+                  foreach($resultado as $fila){
+                    echo '<option value="'. $fila['nombre'] .'">';
+                  }
+                ?>
               </datalist>
               <label for="seccion">Seccion: *</label>
               <input type="text" name="seccion" id="seccion" list="seleccionSeccion"><br><br>
 
-              <datalist id="seleccionTipo">
-                <option value="Texto">
-                <option value="Audio">
-                <option value="Imagen">
-                <option value="V&iacute;deo">
-              </datalist>
-              <label for="tipo">Tipo: *</label>
-              <input type="text" name="tipo" id="tipo" list="seleccionTipo"><br><br>
 
               <label for="fechaDeAlta">Fecha de Alta *</label>
               <input type="date" id="fechaDeAlta" name="fechaDeAlta" required /><br><br>
 
               <label for="fechaFinalizacionAlta">Fecha de finalizaci&oacute;n *</label>
               <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" required /><br><br>
+
+              
             </article>
 
             <!-- Sección dedicada a la toma de datos de caracter más genérica -->
             <article>
               <label for="Descripcion">Descripci&oacute;n *</label> <br>
-              <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" required>Introduzca una descripci&oacute;n del recurso.</textarea>
-            </article>
+              <textarea name="descripcion" id="descripcion" rows="8" cols="80" required>Introduzca una descripci&oacute;n del recurso.</textarea>
 
+              <label for="resumen">Resumen *</label> <br>
+              <textarea name="resumen" id="resumen" rows="8" cols="80" required>Introduzca un breve resumen del recurso.</textarea>
+            </article>
+            <input type="hidden" name="bd" value="<?php echo $_GET['bd']; ?> "
           </fieldset>
           <input type="submit" name="Enviar" class="boton">
           <input type="reset" name="Reset" class="boton">

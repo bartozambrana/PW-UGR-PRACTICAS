@@ -8,6 +8,9 @@
   </head>
 
   <body>
+    <?php 
+      session_start();
+    ?>
     <!-- Cabecera -->
     <header>
       <!--logo-->
@@ -17,12 +20,21 @@
 
       <!--Nombre del gestor -->
       <section class="encabezado">
-        <h1 id="tituloCabecera">Pel&iacute;culas</h1>
+        <h1 id="tituloCabecera">
+          <?php 
+            if( isset($_GET['bd'])){
+              echo $_GET['bd'];
+            }
+          ?>
+        </h1>
       </section>
 
       <!--Indicación de donde nos encontramos-->
       <section class="encabezado">
-        <h2 id="subtituloCabecera">Alta de Secci&oacute;n</h2>
+        <?php 
+          require_once("loginMensajeValidacion.php");
+          formularioLogin();
+        ?>
       </section>
     </header>
 
@@ -33,17 +45,33 @@
           de dicha biblioteca digital
      -->
       <nav id="navSecciones">
-            <a href="./bd1.html" class="enlace1">Inicio</a>
-            <a href="./recursosseccion1.html" class="enlace1">Acci&oacute;n</a>
-            <a href="./recursosseccion1.html" class="enlace1">Aventuras</a>
-            <a href="./recursosseccion1.html" class="enlace1">Ciencia Ficci&oacute;n</a>
-            <a href="./recursosseccion1.html" class="enlace1">Comedia</a>
-            <a href="./recursosseccion1.html" class="enlace1">Drama</a>
-            <a href="./recursosseccion1.html" class="enlace1">Musicales</a>
-            <a href="./recursosseccion1.html" class="enlace1">B&eacute;licas</a>
-            <a href="./recursosseccion1.html" class="enlace1">Suspense</a>
-            <a href="./recursosseccion1.html" class="enlace1">Cl&aacute;sicos</a>
+        <?php
+          if(isset($_SESSION['usuario'])){
+            echo '<a href="./gestorbd.php" class="enlace1">Inicio</a>';
+          }else{
+            echo '<a href="./index.php" class="enlace1">Inicio</a>';
+          }
+          require_once("configuracion.php");
+          require_once("conexion.php");
+          require_once("tratamientoCadenas.php");
+          try{
+            $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
+            $sentencia = $conexion->prepare($sql);
+            $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+            $sentencia->execute();
 
+            $resultado = $sentencia->fetchAll();
+            foreach($resultado as $fila){
+              echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '&empieza=0' .'" class="enlace1">' . $fila['nombre'] . '</a>';
+
+            }
+            
+          }catch(PDOException $e){
+            echo $e;
+            $conexion = null;
+          }
+            
+        ?>
       </nav>
 
       <!--
@@ -51,14 +79,13 @@
       -->
       <section >
         <!-- Formulario para dar de alta seccción -->
-        <form id="formularioCentrado" action="ficheroPHPparaP2.php" method="post">
+        <form id="formularioCentrado" action="procesarAltaSeccion.php" method="post">
 
           <fieldset>
             <legend>Datos de la Secci&oacute;n</legend>
 
             <label for="Titulo">Titulo: *</label>
             <input type="text" id="titulo" name="titulo" required /><br><br>
-
 
             <label for="fechaDeAlta">Fecha de Alta *</label>
             <input type="date" id="fechaDeAlta" name="fechaDeAlta" required /><br><br>
@@ -68,6 +95,8 @@
 
             <label for="Descripcion">Descripci&oacute;n *</label> <br>
             <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" required>Introduzca una descripci&oacute;n de la secci&oacute;n.</textarea>
+
+            <input type="hidden" name="bd" value="<?php if(isset($_GET['bd'])) echo $_GET['bd']; ?>" >
 
           </fieldset>
           <input type="submit" name="Enviar" class="boton">

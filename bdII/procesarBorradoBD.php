@@ -8,7 +8,7 @@
 
     //Realización de la actualización
     try{
-        $sql = "DELETE ". BIBLIOTECAS_DIGITALES .".* FROM " . BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
+        $sql = "DELETE CASCADE". BIBLIOTECAS_DIGITALES .".* FROM " . BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
         $sentencia = $conexion->prepare($sql);
         $sentencia->bindValue(":nombre",$bd);
         $sentencia->execute();

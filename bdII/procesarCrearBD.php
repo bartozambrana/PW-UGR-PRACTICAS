@@ -38,7 +38,7 @@
         $fichero_subido = $dir_subida . basename($_FILES['seleccionImagenBD']['name']);
 
         if(!move_uploaded_file($_FILES['seleccionImagenBD']['tmp_name'], $fichero_subido)){
-            echo "Error en la subida de fichero " . '<br>';
+            echo "Error en la subida de fichero " . '<br>' . 'Directorio actual de ejecución: ' . getcwd() .'<br>' ;
             print_r($_FILES);
             exit();
         }

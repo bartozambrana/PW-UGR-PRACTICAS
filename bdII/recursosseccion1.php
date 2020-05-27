@@ -81,9 +81,11 @@
         <!-- sección general de mostrado de elementos -->
        
             <?php 
+                echo quitarAcentos($_GET["seccion"]);
+
                 try{
                   //Escogemos los recursos pertenecientes a la bilioteca digital que nos encontramos y contamos los recursos, puesto que nos serviran posteriormente
-                  $sql = "SELECT recursos.nombre, recursos.descripcion FROM recursos, secciones WHERE secciones.nombrebd = :bd AND secciones.nombre = :nombreseccion";
+                  $sql = "SELECT recursos.nombre, recursos.descripcion FROM recursos, secciones WHERE secciones.nombrebd = :bd AND recursos.seccion = :nombreseccion AND recursos.seccion = secciones.nombre";
                   $sentencia = $conexion->prepare($sql);
                   $sentencia->bindValue(":bd",quitarAcentos($_GET["bd"]) );
                   $sentencia->bindValue(":nombreseccion",quitarAcentos($_GET["seccion"]) );
@@ -98,6 +100,7 @@
                 }
                 $resultado = $sentencia->fetchAll();
                 $contador = 0;
+                echo count($resultado);
                 $t = 0;
                 echo '<section class="tablegen"> ';
                 for( $i = intval($_GET['empieza']) ; $i < count($resultado) && $t < 9 ; $i++ ){

@@ -93,7 +93,7 @@
             <article class="apilamiento2Secciones">
                 
                 <label for="titulo">T&iacute;tulo: *</label>
-                <input type="text" name="titulo" id="titulo" list="seleccionRecurso" required><br><br>
+                <input type="text" name="titulo" id="titulo" required><br><br>
 
                 <datalist id="seleccionSeccion">';
 

@@ -8,16 +8,17 @@
 
     //Realización de la actualización
     try{
-        $sql = "DELETE CASCADE". BIBLIOTECAS_DIGITALES .".* FROM " . BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
+        $sql = "DELETE ". BIBLIOTECAS_DIGITALES .".* FROM " . BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
         $sentencia = $conexion->prepare($sql);
         $sentencia->bindValue(":nombre",$bd);
         $sentencia->execute();
         $conexion = null;
 
-        header("Location: gestorbd.php");
+        
     }catch(PDOException $e){
         echo $e . "nombre biblioteca digital ". $bd;
         $conexion = null;
         die();
     }
+    header("Location: gestorbd.php?correcto=2");
 ?>

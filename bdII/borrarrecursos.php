@@ -6,6 +6,13 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <title>Borrado de Recurso</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
+  <?php 
+    if(isset($_GET['utilizado'])){
+      if($_GET['utilizado'] == 1){
+        echo '<script> window.onload=function mensaje(){ alert("El recurso no existe, seleccione uno de la lista desplegable "); }</script>';
+      }
+    }
+  ?>
 </head>
 
 <body>

@@ -9,6 +9,24 @@
           ?></title>
     <link rel="stylesheet" type="text/css"  href="estilos.css">
     <script type="text/javascript" src="./validacion.js"></script>
+    <?php 
+    if(isset($_GET['correcto'])){
+      if($_GET['correcto'] == 1){
+        echo  '<script> window.onload=function mensaje(){alert("Recurso Digital Creado");} </script>';
+      }else if($_GET['correcto'] == 2){
+        echo  '<script> window.onload=function mensaje(){alert("Recurso Digital Borrado");} </script>';
+      }else if($_GET['correcto'] == 3){
+        echo  '<script> window.onload=function mensaje(){alert("Recurso Digital Editado");} </script>';
+      }else if($_GET['correcto'] == 4){
+        echo  '<script> window.onload=function mensaje(){alert("Sección Creada");} </script>';
+      }else if($_GET['correcto'] == 5){
+        echo  '<script> window.onload=function mensaje(){alert("Sección Borrada");} </script>';
+      }else{
+        echo '<script> window.onload=function mensaje(){alert("Sección Editada");} </script>';
+      }
+    }
+  ?>
+
   </head>
   <body>
     <?php 
@@ -92,7 +110,7 @@
                 $sentencia->execute();
 
                 $resultado = $sentencia->fetch();
-                echo $resultado['descripcion'];
+                echo quitarAcentos($resultado['descripcion']);
                 
               }catch(PDOException $e){
                 echo $e;

@@ -81,7 +81,6 @@
         <!-- sección general de mostrado de elementos -->
        
             <?php 
-                echo quitarAcentos($_GET["seccion"]);
 
                 try{
                   //Escogemos los recursos pertenecientes a la bilioteca digital que nos encontramos y contamos los recursos, puesto que nos serviran posteriormente
@@ -100,7 +99,6 @@
                 }
                 $resultado = $sentencia->fetchAll();
                 $contador = 0;
-                echo count($resultado);
                 $t = 0;
                 echo '<section class="tablegen"> ';
                 for( $i = intval($_GET['empieza']) ; $i < count($resultado) && $t < 9 ; $i++ ){

@@ -7,6 +7,11 @@
   <title>Biblioteca digital Netflix</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
   <script type="text/javascript" src="./validacion.js"></script>
+  <script>
+    function mostrarRecursos(enunciado){
+      alert(enunciado);
+    }
+  </script>
 </head>
 
 <body>
@@ -51,19 +56,45 @@
           require_once("configuracion.php");
           require_once("conexion.php");
           
-          $sql = "SELECT * FROM ". BIBLIOTECAS_DIGITALES;
-          $resultadoConsulta = $conexion->query($sql);
-
+          try{
+            $sql = "SELECT * FROM ". BIBLIOTECAS_DIGITALES;
+            $resultadoConsulta = $conexion->query($sql);
+          }catch(PDOExcepcion $e){
+            echo $e;
+            $conexion = null;
+            die();
+          }
+          
           foreach($resultadoConsulta as $fila){
-            echo '<section class="Cuadro50BordeMargenIzquierdo">
+            
+            //Obtenemos los recursos asociados a dicha bilioteca digital
+            try{
+              $sql = "SELECT recursos.nombre FROM bd1, secciones, recursos WHERE secciones.nombrebd = bd1.nombre AND secciones.nombre = recursos.seccion AND bd1.nombre = :nombre";
+              $sentencia = $conexion->prepare($sql);
+              $sentencia->bindValue(":nombre",$fila['nombre']);
+              $sentencia->execute();
+            }catch(PDOException $e){
+              echo $e;
+              $conexion = null;
+              die();
+            }            
+            $resultado = $sentencia->fetchAll();
+            $enunciado = "'En ".$fila['nombre']." hay los siguientes recursos; " ;
+            foreach($resultado as $fila2){
+              $enunciado = $enunciado . $fila2['nombre'] . " || ";
+            }
+            $enunciado = $enunciado ."'";
+            echo '<section class="Cuadro50BordeMargenIzquierdo" >
                     <article class="apilamiento2Secciones">
-                      <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra">
+                      <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra" onmouseover="mostrarRecursos('.$enunciado.');" >
                     </article>
   
                     <article class="apilamiento2Secciones">
                         <a href="./bd1.php?bd='.$fila["nombre"].'" class="enlace6">'. $fila["nombre"] .'</a><br>
+            
                     </article>
                   </section>';
+            
           }
 
           $conexion = null;

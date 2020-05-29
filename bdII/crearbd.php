@@ -44,7 +44,7 @@
     
     <!-- Zona princiapl de la página web-->
     <section>
-      <form id="formularioCentrado" action="procesarCrearBD.php" method="post" name="formularioCrearBD" onsubmit="return validarCrearBD();" enctype="multipart/form-data">
+      <form id="formularioCentrado" action="procesarCrearBD" method="post" name="formularioCrearBD" enctype="multipart/form-data" onsubmit="return validarCrearBD();" >
 
         <fieldset >
           <legend>Datos Biblioteca Digital.</legend>
@@ -68,7 +68,7 @@
           </article>
 
         </fieldset>
-        <input type="submit" name="Enviar" class="boton" onclick="return validarCrearBD();">
+        <input type="submit" name="Enviar" class="boton" >
         <input type="reset" name="Reset" class="boton">
       </form>
     </section>

@@ -49,7 +49,7 @@
             <h2 id="tituloGeneral">Datos Recurso a Editar</h2>
             ';
             try{
-                $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabaja, seccion, descripcion, resumen, urlImagen FROM ".RECURSOS ." WHERE nombre = :nombre";
+                $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabajamodificada, fechabaja, seccion, descripcion, resumen, urlImagen FROM ".RECURSOS ." WHERE nombre = :nombre";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(":nombre",quitarAcentos($_GET['recursoseleccionado']) );
                 $sentencia->execute();
@@ -65,7 +65,7 @@
                     <li>Nombre de la biblioteca digital: '. $resultado["nombre"] . '</li>
                     <li>Nombre de la secci&oacute;n a la que pertenece: '. $resultado["seccion"] . '</li>
                     <li>Fecha de alta de la biblioteca digital: '. $resultado["fechaalta"] .'</li>
-                    <li>Fecha de baja de la biblioteca digital: '. $resultado["fechabaja"] .'</li>
+                    <li>Fecha de baja de la biblioteca digital: '. $resultado["fechabajamodificada"] .'</li>
                     <li>Descripcion: ' .$resultado["descripcion"] . '</li>
                     <li>Breve resumen: ' .$resultado["resumen"] . '</li>
                 
@@ -75,6 +75,7 @@
             $descripcion = $resultado['descripcion'];
             $resumen = $resultado['resumen'];
             $imagen = $resultado["urlImagen"];
+            $fecha = $resultado['fechabaja'];
             echo '
         </article>
         
@@ -117,9 +118,9 @@
         echo '</datalist>
             <label for="seccion">Seccion: *</label>
             <input type="text" name="seccion" id="seccion" list="seleccionSeccion" placeholder="'. $seccion .'"><br><br>
-
+            
             <label for="fechaFinalizacionAlta">   Fecha de finalizaci&oacute;n *</label>
-            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" required /><br><br>
+            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" value="'.$fecha.'" required /><br><br>
             </article>
             <!-- Sección dedicada a la toma de datos de caracter más genérica -->
             <article>
@@ -128,6 +129,7 @@
                 <label for="Resumen">Resumen *</label> <br>
                 <textarea name="Resumen" id="Resumen" rows="8" cols="80" required>'. $resumen .'</textarea><br><br>
             </article>
+            <input type="hidden" name="bd" value="'. $_GET['bd'] .'">
 
         </fieldset>
         <input type="submit" name="Enviar" class="boton">

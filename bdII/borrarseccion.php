@@ -5,6 +5,13 @@
     <meta name="author" content="Bartolomé Zambrana Pérez">
     <link rel="stylesheet" type="text/css" href="./estilos.css">
     <title>Baja de Secci&oactue;nes</title>
+    <?php 
+    if(isset($_GET['utilizado'])){
+      if($_GET['utilizado'] == 1){
+        echo '<script> window.onload=function mensaje(){ alert("La sección introducida no existe, seleccione entre las opcciones de la lista desplegable"); }</script>';
+      }
+    }
+  ?>
   </head>
 
   <body>
@@ -106,13 +113,17 @@
             
           echo '<input type="hidden" name="bd" value="'. $_GET['bd'] .'"></datalist>
               <label for="seccion">Seccion: *</label>
-              <input type="text" name="seccion" id="seccion" list="seleccionSeccion" ><br><br>';
+              <input type="text" name="seccion" id="seccion" list="seleccionSeccion" ><br><br>
+              <input type="hidden" name="bd" value="'. $_GET['bd'] . '">
+              ';
 
           echo '</fieldset>
             <input type="submit" name="Enviar" class="boton">
             <input type="reset" name="Reset" class="boton">
           </form>';
+          echo $_GET['bd'];
         ?>
+        
       </section>
 
 

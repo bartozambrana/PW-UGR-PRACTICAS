@@ -215,6 +215,7 @@ function validarModificarUsuario() {
  */
 
 function validarCrearBD() {
+
     let nombre = document.formularioCrearBD.titulo.value;
     if (nombre == "") {
         window.onload = alerta("Campo Título de la BD vacío");
@@ -222,10 +223,11 @@ function validarCrearBD() {
         return false;
     }
 
-    let foto = document.formularioCrearBD.fotoBD.value;
+    let foto = document.formularioCrearBD.seleccionImagenBD.value;
+    console.log("entro");
     if (foto == "") {
         window.onload = alerta("Campo de selección de fotografía vacío");
-        document.formularioCrearBD.fotoBD.focus();
+        document.formularioCrearBD.seleccionImagenBD.focus();
         return false;
     }
 
@@ -256,4 +258,178 @@ function validarCrearBD() {
     }
     return true;
 
+}
+
+function validarEdicionSeccion() {
+    let nombre = document.formularioEdicionSeccion.titulo.value;
+    if (nombre == "") {
+        window.onload = alerta("Campo Título de la Sección vacío");
+        document.formularioEdicionSeccion.titulo.focus();
+        return false;
+    }
+
+
+    let fechaFinalizacionAlta = document.formularioEdicionSeccion.fechaFinalizacionAlta.value;
+    if (fechaFinalizacionAlta == "") {
+        window.onload = alerta("Campo Fecha de Finalización de la Sección vacío");
+        document.formularioEdicionSeccion.fechaFinalizacionAlta.focus();
+        return false;
+    }
+
+    let descripcion = document.formularioEdicionSeccion.Descripcion.value;
+    if (descripcion.length > 400) {
+        window.onload = alerta("El campo Descripciñon demasiado extenso");
+        document.formularioEdicionSeccion.Descripcion.focus();
+        return false;
+    }
+    return true;
+}
+
+function validarEdicionRecurso() {
+    let nombre = document.formularioEdicionRecursos.titulo.value;
+    if (nombre == "") {
+        window.onload = alerta("Campo Título vacío");
+        document.formularioEdicionRecursos.titulo.focus();
+        return false;
+    }
+
+    let seccion = document.formularioEdicionRecursos.seccion.value;
+    if (seccion == "") {
+        window.onload = alerta("Campo Sección vacío");
+        document.formularioEdicionRecursos.seccion.focus();
+    }
+
+    let fechaFinalizacionAlta = document.formularioEdicionRecursos.fechaFinalizacionAlta.value;
+    if (fechaFinalizacionAlta == "") {
+        window.onload = alerta("Campo Fecha de Finalización de la Sección vacío");
+        document.formularioEdicionRecursos.fechaFinalizacionAlta.focus();
+        return false;
+    }
+
+    let descripcion = document.formularioEdicionRecursos.Descripcion.value;
+    if (descripcion == "") {
+        window.onload = alerta("El campo Descripción vacío");
+        document.formularioEdicionRecursos.Descripcion.focus();
+        return false;
+    } else if (descripcion.length > 600) {
+        window.onload = alerta("El campo Descripción demasiado extenso");
+        document.formularioEdicionRecursos.Descripcion.focus();
+        return false;
+    }
+
+    let resumen = document.formularioEdicionRecursos.Resumen.value;
+    if (resumen == "") {
+        window.onload = alerta("El campo Descripción vacío");
+        document.formularioEdicionRecursos.Resumen.focus();
+        return false;
+    } else if (resumen.length > 700) {
+        window.onload = alerta("El campo Descripción demasiado extenso");
+        document.formularioEdicionRecursos.Resumen.focus();
+        return false;
+    }
+    return true;
+}
+
+function validarAltaRecurso() {
+    let foto = document.formularioAltaRecurso.seleccionRecurso.value;
+    if (foto == "") {
+        window.onload = alerta("Foto no Seleccionada");
+        document.formularioAltaRecurso.seleccionRecurso.focus();
+        return false;
+    }
+
+    let nombre = document.formularioAltaRecurso.nombre.value;
+    if (nombre == "") {
+        window.onload = alerta("Campo nombre vacío");
+        document.formularioAltaRecurso.nombre.focus();
+        return false;
+    } else if (nombre.length > 140) {
+        window.onload = alerta("Nombre Demasiado Extenso");
+        document.formularioAltaRecurso.nombre.focus();
+        return false;
+    }
+
+    let seccion = document.formularioAltaRecurso.seccion.value;
+    if (seccion == "") {
+        window.onload = alerta("Campo Sección vacío");
+        document.formularioAltaRecurso.seccion.focus();
+        return false;
+    }
+
+    let fechaAlta = document.formularioAltaRecurso.fechaDeAlta.value;
+    if (fechaAlta == "") {
+        window.onload = alerta("Campo Fecha de Alta vacío");
+        document.formularioAltaRecurso.fechaDeAlta.focus();
+        return false;
+    }
+
+    let fechaFinalizacionAlta = document.formularioAltaRecurso.fechaFinalizacionAlta.value;
+    if (fechaFinalizacionAlta == "") {
+        window.onload = alerta("Campo Fecha de Baja vacío");
+        document.formularioAltaRecurso.fechaFinalizacionAlta.focus();
+        return false;
+    }
+
+    let descripcion = document.formularioAltaRecurso.descripcion.value;
+    if (descripcion == "") {
+        window.onload = alerta("El campo Descripción vacío");
+        document.formularioAltaRecurso.descripcion.focus();
+        return false;
+    } else if (descripcion.length > 600) {
+        window.onload = alerta("El campo Descripción demasiado extenso");
+        document.formularioAltaRecurso.descripcion.focus();
+        return false;
+    }
+
+    let resumen = document.formularioAltaRecurso.resumen.value;
+    if (resumen == "") {
+        window.onload = alerta("El campo Descripción vacío");
+        document.formularioAltaRecurso.resumen.focus();
+        return false;
+    } else if (resumen.length > 700) {
+        window.onload = alerta("El campo Descripción demasiado extenso");
+        document.formularioAltaRecurso.resumen.focus();
+        return false;
+    }
+    return true;
+}
+
+function validarAltaSeccion() {
+
+
+    let nombre = document.formularioAltaSeccion.titulo.value;
+    if (nombre == "") {
+        window.onload = alerta("Campo titulo vacío");
+        document.formularioAltaSeccion.titulo.focus();
+        return false;
+    } else if (nombre.length > 60) {
+        window.onload = alerta("Título Demasiado Extenso");
+        document.formularioAltaSeccion.titulo.focus();
+        return false;
+    }
+
+
+
+    let fechaAlta = document.formularioAltaSeccion.fechaDeAlta.value;
+    if (fechaAlta == "") {
+        window.onload = alerta("Campo Fecha de Alta vacío");
+        document.formularioAltaSeccion.fechaDeAlta.focus();
+        return false;
+    }
+
+    let fechaFinalizacionAlta = document.formularioAltaSeccion.fechaFinalizacionAlta.value;
+    if (fechaFinalizacionAlta == "") {
+        window.onload = alerta("Campo Fecha de Baja vacío");
+        document.formularioAltaSeccion.fechaFinalizacionAlta.focus();
+        return false;
+    }
+
+    let descripcion = document.formularioAltaSeccion.Descripcion.value;
+    if (descripcion.length > 400) {
+        window.onload = alerta("El campo Descripción demasiado extenso");
+        document.formularioAltaSeccion.Descripcion.focus();
+        return false;
+    }
+
+    return true;
 }

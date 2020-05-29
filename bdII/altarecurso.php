@@ -5,6 +5,16 @@
     <meta name="author" content="Bartolomé Zambrana Pérez">
     <link rel="stylesheet" type="text/css" href="./estilos.css">
     <title>Alta de Recurso</title>
+    <script type="text/javascript" src="./validacion.js"></script>
+    <?php 
+    if(isset($_GET['utilizado'])){
+      if($_GET['utilizado'] == 1){
+        echo '<script> window.onload=function mensaje(){ alert("El recurso introducido ya existe en la plataforma"); }</script>';
+      }else if($_GET['utilizado'] == 2){
+        echo '<script> window.onload=function mensaje(){ alert("La sección introducida no existe"); }</script>';
+      }
+    }
+  ?>
   </head>
 
   <body>
@@ -78,7 +88,7 @@
       -->
       <section>
         <!-- Formulario para dar de alta a un recurso -->
-        <form id="formularioCentrado" action="procesarAltaRecurso.php" method="post">
+        <form id="formularioCentrado" action="procesarAltaRecurso.php" method="post" name="formularioAltaRecurso" onsubmit="return validarAltaRecurso();" enctype="multipart/form-data">
 
           <fieldset>
             <legend>Datos Recurso</legend>
@@ -92,7 +102,7 @@
 
             <article class="apilamiento2Secciones">
               <label for="nombre">Nombre: *</label>
-              <input type="text" id="nombre" name="nombre" required /><br><br>
+              <input type="text" id="nombre" name="nombre" /><br><br>
 
               <datalist id="seleccionSeccion">
                 <?php 
@@ -106,10 +116,12 @@
 
 
               <label for="fechaDeAlta">Fecha de Alta *</label>
-              <input type="date" id="fechaDeAlta" name="fechaDeAlta" required /><br><br>
+              <input type="date" id="fechaDeAlta" name="fechaDeAlta"  /><br><br>
 
               <label for="fechaFinalizacionAlta">Fecha de finalizaci&oacute;n *</label>
-              <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" required /><br><br>
+              <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta"  /><br><br>
+
+              
 
               
             </article>
@@ -122,7 +134,8 @@
               <label for="resumen">Resumen *</label> <br>
               <textarea name="resumen" id="resumen" rows="8" cols="80" required>Introduzca un breve resumen del recurso.</textarea>
             </article>
-            <input type="hidden" name="bd" value="<?php echo $_GET['bd']; ?> "
+            
+            <input type="hidden" name="bd" value="<?php echo $_GET['bd']; ?>">
           </fieldset>
           <input type="submit" name="Enviar" class="boton">
           <input type="reset" name="Reset" class="boton">

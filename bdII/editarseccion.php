@@ -6,6 +6,15 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <link rel="stylesheet" type="text/css" href="./estilos.css">
   <title>Edici&oacute;n de Secci&oacute;n</title>
+  <?php 
+    if(isset($_GET['utilizado'])){
+      if($_GET['utilizado'] == 1){
+        echo '<script> window.onload=function mensaje(){ alert("Nombre de sección ya utilizado"); }</script>';
+      }else if($_GET['utilizado'] == 2){
+        echo '<script> window.onload=function mensaje(){ alert("Ha escrito una sección no mostrada en la lista desplegable"); }</script>';
+      }
+    }
+  ?>
 </head>
 
 <body>

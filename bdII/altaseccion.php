@@ -5,6 +5,14 @@
     <meta name="author" content="Bartolomé Zambrana Pérez">
     <link rel="stylesheet" type="text/css" href="./estilos.css">
     <title>Alta de Secci&oactue;n</title>
+    <script type="text/javascript" src="./validacion.js"></script>
+    <?php 
+    if(isset($_GET['utilizado'])){
+      if($_GET['utilizado'] == 1){
+        echo '<script> window.onload=function mensaje(){ alert("La sección introducida ya existe en esta biblioteca digital"); }</script>';
+      }
+    }
+  ?>
   </head>
 
   <body>
@@ -79,22 +87,22 @@
       -->
       <section >
         <!-- Formulario para dar de alta seccción -->
-        <form id="formularioCentrado" action="procesarAltaSeccion.php" method="post">
+        <form id="formularioCentrado" action="procesarAltaSeccion.php" method="post" name="formularioAltaSeccion" onsubmit="return validarAltaSeccion();">
 
           <fieldset>
             <legend>Datos de la Secci&oacute;n</legend>
 
             <label for="Titulo">Titulo: *</label>
-            <input type="text" id="titulo" name="titulo" required /><br><br>
+            <input type="text" id="titulo" name="titulo"  /><br><br>
 
             <label for="fechaDeAlta">Fecha de Alta *</label>
-            <input type="date" id="fechaDeAlta" name="fechaDeAlta" required /><br><br>
+            <input type="date" id="fechaDeAlta" name="fechaDeAlta"  /><br><br>
 
             <label for="fechaFinalizacionAlta">Fecha de finalizaci&oacute;n *</label>
-            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" required /><br><br>
+            <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta"  /><br><br>
 
             <label for="Descripcion">Descripci&oacute;n *</label> <br>
-            <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" required>Introduzca una descripci&oacute;n de la secci&oacute;n.</textarea>
+            <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" >Introduzca una descripci&oacute;n de la secci&oacute;n.</textarea>
 
             <input type="hidden" name="bd" value="<?php if(isset($_GET['bd'])) echo $_GET['bd']; ?>" >
 

@@ -6,6 +6,25 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <title>Biblioteca digital Netflix</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
+  <script>
+    function mostrarRecursos(enunciado){
+      alert(enunciado);
+    }
+  </script>
+
+  <?php 
+    if(isset($_GET['correcto'])){
+      if($_GET['correcto'] == 1){
+        echo  '<script> window.onload=function mensaje(){alert("Biblioteca Digital Creada");} </script>';
+      }else if($_GET['correcto'] == 2){
+        echo  '<script> window.onload=function mensaje(){alert("Biblioteca Digital Borrada");} </script>';
+      }else if($_GET['correcto'] == 3){
+        echo  '<script> window.onload=function mensaje(){alert("Biblioteca Digital Editada");} </script>';
+      }else{
+        echo '<script> window.onload=function mensaje(){alert("Se produjo un error vuelva a intentarlo");} </script>';
+      }
+    }
+  ?>
 </head>
 
 <body>
@@ -49,14 +68,38 @@
           //obtenemos las bibliotecas digitales de la base de datos. 
           require_once("configuracion.php");
           require_once("conexion.php");
-          
-          $sql = "SELECT * FROM ". BIBLIOTECAS_DIGITALES;
-          $resultadoConsulta = $conexion->query($sql);
 
+          try{
+            $sql = "SELECT * FROM ". BIBLIOTECAS_DIGITALES;
+            $resultadoConsulta = $conexion->query($sql);
+          }catch(PDOExcepcion $e){
+            echo $e;
+            $conexion = null;
+            die();
+          }
+          
           foreach($resultadoConsulta as $fila){
-            echo '<section class="Cuadro50BordeMargenIzquierdo">
+            
+            //Obtenemos los recursos asociados a dicha bilioteca digital
+            try{
+              $sql = "SELECT recursos.nombre FROM bd1, secciones, recursos WHERE secciones.nombrebd = bd1.nombre AND secciones.nombre = recursos.seccion AND bd1.nombre = :nombre";
+              $sentencia = $conexion->prepare($sql);
+              $sentencia->bindValue(":nombre",$fila['nombre']);
+              $sentencia->execute();
+            }catch(PDOException $e){
+              echo $e;
+              $conexion = null;
+              die();
+            }            
+            $resultado = $sentencia->fetchAll();
+            $enunciado = "'En ".$fila['nombre']." hay los siguientes recursos; " ;
+            foreach($resultado as $fila2){
+              $enunciado = $enunciado . $fila2['nombre'] . " || ";
+            }
+            $enunciado = $enunciado ."'";
+            echo '<section class="Cuadro50BordeMargenIzquierdo" >
                     <article class="apilamiento2Secciones">
-                      <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra">
+                      <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra" onmouseover="mostrarRecursos('.$enunciado.');" >
                     </article>
   
                     <article class="apilamiento2Secciones">
@@ -87,6 +130,7 @@
       </p>
     </section>
   </footer>
+  
 </body>
 
 </html>

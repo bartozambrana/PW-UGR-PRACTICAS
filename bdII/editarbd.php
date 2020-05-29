@@ -53,7 +53,7 @@
           require_once("conexion.php");
           require_once("tratamientoCadenas.php");
 
-          $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabaja, descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
+          $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabajamodificada,fechabaja, descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
           $sentencia = $conexion->prepare($sql);
           $sentencia->bindValue(":nombre",quitarAcentos($_GET["bibliotecaEditar"]) );
           $sentencia->execute();
@@ -63,7 +63,7 @@
             echo'<ul class="relevante">
                   <li>Nombre de la biblioteca digital: '. $fila["nombre"] . '</li>
                   <li>Fecha de alta de la biblioteca digital: '. $fila["fechaalta"] .'</li>
-                  <li>Fecha de baja de la biblioteca digital: '. $fila["fechabaja"] .'</li>
+                  <li>Fecha de baja de la biblioteca digital: '. $fila["fechabajamodificada"] .'</li>
                   <li>Descripcion: ' .$fila["descripcion"] . '</li>
                   
                 </ul>';
@@ -79,7 +79,7 @@
           <legend>Datos Biblioteca Digital.</legend>
  
           <label for="fechaFinalizacionAlta">Fecha de finalizaci&oacute;n *</label>
-          <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta"  /><br><br>
+          <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" value="<?php echo $resultado[0]['fechabaja'];?>" /><br><br>
 
           <label for="Descripcion">Descripci&oacute;n *</label> <br><br>
           <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" ></textarea>

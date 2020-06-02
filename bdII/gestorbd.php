@@ -90,13 +90,17 @@
               echo $e;
               $conexion = null;
               die();
-            }            
+            }         
+
             $resultado = $sentencia->fetchAll();
             $enunciado = "'En ".$fila['nombre']." hay los siguientes recursos; " ;
+
             foreach($resultado as $fila2){
               $enunciado = $enunciado . $fila2['nombre'] . " || ";
             }
+
             $enunciado = $enunciado ."'";
+            
             echo '<section class="Cuadro50BordeMargenIzquierdo" >
                     <article class="apilamiento2Secciones">
                       <img src="'. $fila["urlImagen"] .'" alt="'. $fila["nombre"] .'" class="imagen100porcientoBordeSinSombra" onmouseover="mostrarRecursos('.$enunciado.');" >

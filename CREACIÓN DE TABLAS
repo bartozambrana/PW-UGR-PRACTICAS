@@ -14,4 +14,4 @@ v
 
 CREATE TABLE secciones ( nombre varchar(60) NOT NULL, fechaalta date NOT NULL, fechabaja date NOT NULL, descripcion varchar(400) not null, nombrebd varchar(20) not null, PRIMARY KEY(nombre), FOREIGN KEY(nombrebd) REFERENCES bd1(nombre,nombrebd) ON DELETE CASCADE ON UPDATE CASCADE);
 
-INSERT INTO secciones VALUES('Acci&oacute;','1999-09-09','2030-09-09','Esta secci&oacute;n contiene toda la informaci&oacute;n relacionada con pel&iacute;culas de acci&oacute;n','Pel&iacute;culas');
+INSERT INTO secciones VALUES('Acci&oacute;n','1999-09-09','2030-09-09','Esta secci&oacute;n contiene toda la informaci&oacute;n relacionada con pel&iacute;culas de acci&oacute;n','Pel&iacute;culas');

@@ -29,8 +29,7 @@
     <section class="encabezado">
       <h1 id="tituloCabecera"> 
         <?php
-          require_once("tratamientoCadenas.php");
-          echo quitarAcentos($_GET['bd']);
+          echo $_GET['bd'];
         ?> </h1>
     </section>
 
@@ -63,7 +62,7 @@
         try{
           $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
           $sentencia = $conexion->prepare($sql);
-          $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+          $sentencia->bindValue(":nombrebd",$_GET["bd"] );
           $sentencia->execute();
 
           $resultado = $sentencia->fetchAll();
@@ -87,7 +86,7 @@
           try{
             $sql = "SELECT recursos.nombre FROM " . SECCIONES . ",". RECURSOS ." WHERE secciones.nombrebd = :bd AND recursos.seccion = secciones.nombre";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":bd", quitarAcentos($_GET['bd']));
+            $sentencia->bindValue(":bd", $_GET['bd']);
             $sentencia->execute();
             //obtenemos todos los resultados.
             $resultado = $sentencia->fetchAll();

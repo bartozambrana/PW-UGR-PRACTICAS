@@ -1,6 +1,7 @@
 <?php
-
+    //Requiere que el documento donde se utilice tenga un session_start();
     function formularioLogin(){
+        //Usuario no logueado
         if(!isset($_SESSION['usuario'])){
             echo '<form id="formularioLogin" name="formularioLogin" method="post" action="login.php" onsubmit="return validarLogin();">
 
@@ -20,10 +21,9 @@
                         }
                       </script>';
             }
-        }else{
+        }else{ //Usuario logueado
             echo '  <h2 id="subtituloCabecera"> '. $_SESSION['usuario'] . '</h2>
                     <aside>
-                        <a href="./borrargestor.html" class="enlace2">Baja</a>
                         <a href="./editargestor.php" class="enlace2">Edici&oacute;n</a>
                         <a href="./logout.php" class="enlace2"> Cerrar Sesi&oacute;n </a>
                     </aside>';

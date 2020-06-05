@@ -51,11 +51,10 @@
         <?php 
           require_once("configuracion.php");
           require_once("conexion.php");
-          require_once("tratamientoCadenas.php");
 
           $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabajamodificada,fechabaja, descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
           $sentencia = $conexion->prepare($sql);
-          $sentencia->bindValue(":nombre",quitarAcentos($_GET["bibliotecaEditar"]) );
+          $sentencia->bindValue(":nombre",$_GET["bibliotecaEditar"] );
           $sentencia->execute();
 
           $resultado = $sentencia->fetchAll();
@@ -84,7 +83,7 @@
           <label for="Descripcion">Descripci&oacute;n *</label> <br><br>
           <textarea name="Descripcion" id="Descripcion" rows="8" cols="80" ></textarea>
 
-          <input type="hidden" name="nombreBD" id="nombreBD" value="<?php echo quitarAcentos($_GET["bibliotecaEditar"]); ?>">
+          <input type="hidden" name="nombreBD" id="nombreBD" value="<?php echo $_GET["bibliotecaEditar"]; ?>">
         </fieldset>
         <input type="submit" name="Enviar" class="boton" >
         <input type="reset" name="Reset" class="boton">

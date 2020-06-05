@@ -3,7 +3,6 @@
     //Obtención de los ficheros necesarios: 
     require_once("configuracion.php");
     require_once("conexion.php");
-    require_once("tratamientoCadenas.php");
 
     //Obtención de variables: 
     $nombreSeccion = $_POST['titulo'];
@@ -16,8 +15,8 @@
     try{
         $sql = "SELECT nombre FROM ".SECCIONES." WHERE nombre = :nombre AND nombrebd = :bd";
         $sentencia = $conexion->prepare($sql);
-        $sentencia->bindValue(":nombre", quitarAcentos($nombreSeccion));
-        $sentencia->bindValue(":bd", quitarAcentos($bd));
+        $sentencia->bindValue(":nombre", $nombreSeccion);
+        $sentencia->bindValue(":bd", $bd);
         $sentencia->execute();
     }catch(PDOException $e){
         echo $e;
@@ -35,16 +34,16 @@
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(":nombre",$nombreSeccion);
                 $sentencia->bindValue(":fechabaja", $fechaBaja);
-                $sentencia->bindValue(":bd", quitarAcentos($bd));
-                $sentencia->bindValue(":nombreseccion", quitarAcentos($nombreSeccionAntiguo));
+                $sentencia->bindValue(":bd", $bd);
+                $sentencia->bindValue(":nombreseccion", $nombreSeccionAntiguo);
             }else{
                 $sql = "UPDATE ". SECCIONES . " SET nombre = :nombre, fechabaja = :fechabaja, descripcion = :descripcion WHERE nombre = :nombreseccion AND nombrebd = :bd";
                 $sentencia = $conexion->prepare($sql);
                 $sentencia->bindValue(":nombre",$nombreSeccion);
                 $sentencia->bindValue(":fechabaja", $fechaBaja);
                 $sentencia->bindValue(":descripcion", $descripcion);
-                $sentencia->bindValue(":bd", quitarAcentos($bd));
-                $sentencia->bindValue(":nombreseccion", quitarAcentos($nombreSeccionAntiguo));
+                $sentencia->bindValue(":bd", $bd);
+                $sentencia->bindValue(":nombreseccion", $nombreSeccionAntiguo);
             }
             $sentencia->execute();
         }catch(PDOException $e){

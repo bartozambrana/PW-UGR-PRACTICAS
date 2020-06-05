@@ -23,8 +23,7 @@
       <section class="encabezado">
         <h1 id="tituloCabecera">
             <?php 
-                require_once("tratamientoCadenas.php");
-                echo quitarAcentos($_GET["bd"]);
+                echo $_GET["bd"];
             ?></h1>
       </section>
 
@@ -58,7 +57,7 @@
               try{
                 $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+                $sentencia->bindValue(":nombrebd",$_GET["bd"]);
                 $sentencia->execute();
               }catch(PDOException $e){
                 echo $e;
@@ -67,7 +66,7 @@
               
               $resultado = $sentencia->fetchAll();
               foreach($resultado as $fila){
-                echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '" class="enlace1">' . $fila['nombre'] . '</a>';
+                echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '&empieza=0" class="enlace1">' . $fila['nombre'] . '</a>';
 
               }
             ?>
@@ -80,10 +79,10 @@
           //Realización de la consulta del recurso.
 
           try{
-            $sql = "SELECT recursos.* FROM recursos, secciones WHERE secciones.nombrebd = :bd AND secciones.nombre = :nombreseccion" ;
+            $sql = "SELECT recursos.* FROM recursos, secciones WHERE secciones.nombrebd = :bd AND secciones.nombre = :nombreseccion AND recursos.seccion = secciones.nombre" ;
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":bd",quitarAcentos($_GET["bd"]) );
-            $sentencia->bindValue(":nombreseccion",quitarAcentos($_GET["seccion"]) );
+            $sentencia->bindValue(":bd",$_GET["bd"] );
+            $sentencia->bindValue(":nombreseccion",$_GET["seccion"] );
             $sentencia->execute();
           }catch(PDOException $e){
             echo $e;
@@ -102,7 +101,7 @@
             }
 
             $siguiente = ($siguiente + 1) % (count($resultado));
-            if($fila['nombre'] == quitarAcentos($_GET['recurso'])){
+            if($fila['nombre'] == $_GET['recurso']){
               echo '<article class="apilamiento2Secciones">
                   <img src="'. $fila['urlImagen'] .'"  id="imagenRecurso">
                 </article>

@@ -90,17 +90,28 @@ function validarFormularioAltaUsuario() {
         window.onload = alerta("La dirección de email es incorrecta.");
         document.formularioAltaUsuario.email.focus();
         return false;
+    } else if (email.length > 100) {
+        window.onload = alerta("La dirección de email es demasiada extensa.");
+        document.formularioAltaUsuario.email.focus();
+        return false;
     }
 
     //Telefono
-    //Optenido de la fuente: https://www.it-swarm.dev/es/javascript/validar-el-numero-de-telefono-con-javascript/970496723/
     let telf = document.formularioAltaUsuario.telefono.value;
     if (telf != "") {
-        if (!(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(telf))) {
-            window.onload = alerta("Telefono introducido no correcto");
+        if (!(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(telf))) {
+            window.onload = alerta("Telefono introducido no correcto, tiene que introducirse procedencia de teléfono");
+            document.formularioAltaUsuario.telefono.focus();
+            return false;
+        } else if (telf.length > 20) {
+            window.onload = alerta("Telefono introducido no existe supera los 20 dígitos");
             document.formularioAltaUsuario.telefono.focus();
             return false;
         }
+    } else if (telf = "") {
+        window.onload = alerta("Telefono no introducido");
+        document.formularioAltaUsuario.telefono.focus();
+        return false;
     }
     //Usuarios
     let usuario = document.formularioAltaUsuario.usuario.value;
@@ -188,12 +199,20 @@ function validarModificarUsuario() {
         window.onload = alerta("La dirección de email es incorrecta.");
         document.formularioEdicionUsuario.email.focus();
         return false;
+    } else if (email.length > 100) {
+        window.onload = alerta("La dirección de email es demasiada extensa.");
+        document.formularioEdicionUsuario.email.focus();
+        return false;
     }
 
     let telefono = document.formularioEdicionUsuario.telefono.value;
     if (telefono != "") {
-        if (!(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im.test(telefono))) {
+        if (!(/^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/.test(telefono))) {
             window.onload = alerta("Telefono introducido no correcto");
+            document.formularioEdicionUsuario.telefono.focus();
+            return false;
+        } else if (telefono.length > 20) {
+            window.onload = alerta("Telefono introducido no correcto, supera los 20 dígitos");
             document.formularioEdicionUsuario.telefono.focus();
             return false;
         }
@@ -221,13 +240,17 @@ function validarCrearBD() {
         window.onload = alerta("Campo Título de la BD vacío");
         document.formularioCrearBD.titulo.focus();
         return false;
+    } else if (nombre.length > 20) {
+        window.onload = alerta("Nombre de Biblioteca digital demasiado extenso");
+        document.formularioCrearBD.titulo.focus();
+        return false;
     }
 
-    let foto = document.formularioCrearBD.seleccionImagenBD.value;
+    let foto = document.formularioCrearBD.foto.value;
     console.log("entro");
     if (foto == "") {
         window.onload = alerta("Campo de selección de fotografía vacío");
-        document.formularioCrearBD.seleccionImagenBD.focus();
+        document.formularioCrearBD.foto.focus();
         return false;
     }
 
@@ -266,6 +289,10 @@ function validarEdicionSeccion() {
         window.onload = alerta("Campo Título de la Sección vacío");
         document.formularioEdicionSeccion.titulo.focus();
         return false;
+    } else if (nombre.length > 60) {
+        window.onload = alerta("Nombre de sección demasiado extenso");
+        document.formularioEdicionSeccion.titulo.focus();
+        return false;
     }
 
 
@@ -291,8 +318,13 @@ function validarEdicionRecurso() {
         window.onload = alerta("Campo Título vacío");
         document.formularioEdicionRecursos.titulo.focus();
         return false;
+    } else if (nombre.length > 140) {
+        window.onload = alerta("Campo Título demasiado extenso");
+        document.formularioEdicionRecursos.titulo.focus();
+        return false;
     }
 
+    //No hace falta validar nada adicional, ya se encuentra validado al crear la sección
     let seccion = document.formularioEdicionRecursos.seccion.value;
     if (seccion == "") {
         window.onload = alerta("Campo Sección vacío");

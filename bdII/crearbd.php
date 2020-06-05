@@ -7,6 +7,33 @@
   <title>Crear BD</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
   <script type="text/javascript" src="./validacion.js"></script>
+  <?php 
+    if(isset($_GET['error'])){
+      switch($_GET['error']){
+        case 1:
+          echo '<script> alert("Error más de un elemento seleccionado, o no definido en la selección de imagen"); </script>';
+        break;
+
+        case 2:
+          echo '<script> alert("Documento no seleccionado en la selección de imagen"); </script>';
+        break;
+        case 3:
+          echo '<script> alert("Error supera el tamaño límite en la selección de imagen"); </script>';
+        break;
+
+        case 4:
+          echo '<script> alert("Algún error ocurrió en la selección de imagen"); </script>';
+        break;
+
+        case 5:
+          echo '<script> alert("Error no es una imagen"); </script>';
+        break;
+
+        default: 
+          echo '<script> alert("La biblioteca digital introducida ya existe"); </script>';
+      }
+    }
+  ?>
 </head>
 
 <body>
@@ -49,7 +76,7 @@
         <fieldset >
           <legend>Datos Biblioteca Digital.</legend>
           <article class="apilamiento2Secciones">
-            <input type="file" name="seleccionImagenBD" class="boton" id="seleccionImagenBD" >
+            <input type="file" name="foto" class="boton" id="foto" >
           </article>
 
           <article class="apilamiento2Secciones">

@@ -1,78 +1,76 @@
 <?php 
     require_once("conexion.php");
     require_once("configuracion.php");
-    try{
-        //Comprobamos si hay más de un elementp seleccionado, o no está definido
-        if(!isset($_FILES['seleccionImagenBD']['error']) || is_array($_FILES['seleccionImagenBD']['error'])){
-            throw new RuntimeException("Error más de un elemento seleccionado, o no definido");           
+    require_once("subidaFichero.php");
+
+    //Comprobamos el campo de la selección de imagen
+    $error = comprobarYsubir("foto");
+
+    if($error != -1){
+        switch($error){
+            case 1: //Error más de un elemento seleccionado, o no definido
+                header("Location: crearbd.php?error=1");
+            break;
+
+            case 2: //Documento no seleccionado
+                header("Location: crearbd.php?error=2");
+            break;
+
+            case 3: //Supera el tamaño límite
+                header("Location: crearbd.php?error=3");
+            break;
+
+            case 4: //Algún error ocurrió.
+                header("Location: crearbd.php?error=4");
+            break;
+
+            case 5: //No es una imagen
+                header("Location: crearbd.php?error=5");
+            break;
         }
-        
-        //echo $_FILES['seleccionImagenBD']['name'];
-        //Comprobamos los distintos errores posibles: 
-        switch ($_FILES['seleccionImagenBD']['error']) {
-            case UPLOAD_ERR_OK:
-                break;
-            case UPLOAD_ERR_NO_FILE:
-                throw new RuntimeException('Documento no seleccionado.');
-            case UPLOAD_ERR_INI_SIZE:
-            case UPLOAD_ERR_FORM_SIZE:
-                throw new RuntimeException('Supera el tamaño límite');
-            default:
-                throw new RuntimeException('Algún error ocurrió.');
-        }
-
-        // //Comprobamos que se trata de una imagen:
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
-        if (false === $ext = array_search(
-            $finfo->file($_FILES['seleccionImagenBD']['tmp_name']),
-            array(
-                'jpg' => 'image/jpeg',
-                'png' => 'image/png',
-                'gif' => 'image/gif',
-            ),
-            true
-        )) {
-            throw new RuntimeException('No es una imagen');
-        }
-
-        $dir_subida = './imagenes/';
-        $fichero_subido = $dir_subida . basename($_FILES['seleccionImagenBD']['name']);
-
-        // if(!move_uploaded_file($_FILES['seleccionImagenBD']['tmp_name'], $fichero_subido)){
-        //     echo "Error en la subida de fichero " . '<br>' . 'Directorio actual de ejecución: ' . getcwd() .'<br>' ;
-        //     print_r($_FILES);
-        //     exit();
-        // }
-
+    }else{
         //Obención de variables:
-
         $nombre = $_POST['titulo'];
         $fechaAlta = $_POST["fechaDeAlta"];
         $fechaBaja = $_POST["fechaFinalizacionAlta"];
-        $descripcion = $_POST["Descripcion"]; 
+        $descripcion = $_POST["Descripcion"];
 
-
+        //Comprobamos si la biblioteca digiral a introducir ya existe: 
         try{
-            $sql = "INSERT INTO ". BIBLIOTECAS_DIGITALES ." (nombre,fechaalta,fechabaja,descripcion,urlImagen) VALUES(:nombre,:fechaalta,:fechabaja,:descripcion,:imagen)";
-            $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":nombre",$nombre);
-            $sentencia->bindValue(":fechaalta", $fechaAlta);
-            $sentencia->bindValue(":fechabaja", $fechaBaja);
-            $sentencia->bindValue(":imagen", "./imagenes/documentales.jpg");
-            $sentencia->bindValue(":descripcion", $descripcion);
-            $sentencia->execute();
-
-            $conexion = null;
+            $sql = "SELECT nombre FROM ". BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(":nombre",$nombre);
+                $sentencia->execute();
         }catch(PDOException $e){
             echo $e;
             $conexion = null;
             die();
         }
-        header("Location: gestorbd.php?correcto=1");
-        //Realizamos la inserción de los demás datos
-    }catch(RuntimeException $e){
-        echo $e->getMessage();
-    }
 
+        $resultado = $sentencia->fetchAll();
+
+        if(count($resultado) == 0){
+            try{
+                $sql = "INSERT INTO ". BIBLIOTECAS_DIGITALES ." (nombre,fechaalta,fechabaja,descripcion,urlImagen) VALUES(:nombre,:fechaalta,:fechabaja,:descripcion,:imagen)";
+                $sentencia = $conexion->prepare($sql);
+                $sentencia->bindValue(":nombre",$nombre);
+                $sentencia->bindValue(":fechaalta", $fechaAlta);
+                $sentencia->bindValue(":fechabaja", $fechaBaja);
+                $sentencia->bindValue(":imagen", "./imagenes/documentales.jpg");
+                $sentencia->bindValue(":descripcion", $descripcion);
+                $sentencia->execute();
+        
+                $conexion = null;
+            }catch(PDOException $e){
+                echo $e;
+                $conexion = null;
+                die();
+            }
+            header("Location: gestorbd.php?correcto=1");
+        }else{
+            $conexion = null;
+            header("Location: crearbd.php?error=6");
+        }
+    }
 
 ?>

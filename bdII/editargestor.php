@@ -6,6 +6,7 @@
   <meta name="author" content="Bartolomé Zambrana Pérez">
   <title>Edici&oacute;n de usuarios</title>
   <link rel="stylesheet" type="text/css" href="estilos.css">
+  <script type="text/javascript" src="./validacion.js"></script>
 </head>
 
 <body>

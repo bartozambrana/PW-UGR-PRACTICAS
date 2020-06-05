@@ -6,15 +6,39 @@
     <link rel="stylesheet" type="text/css" href="./estilos.css">
     <title>Alta de Recurso</title>
     <script type="text/javascript" src="./validacion.js"></script>
-    <?php 
-    if(isset($_GET['utilizado'])){
-      if($_GET['utilizado'] == 1){
-        echo '<script> window.onload=function mensaje(){ alert("El recurso introducido ya existe en la plataforma"); }</script>';
-      }else if($_GET['utilizado'] == 2){
-        echo '<script> window.onload=function mensaje(){ alert("La sección introducida no existe"); }</script>';
+    <?php
+      //Comprobaciones en la creación de un recruso
+      if(isset($_GET['utilizado'])){
+        if($_GET['utilizado'] == 1){
+          echo '<script> window.onload=function mensaje(){ alert("El recurso introducido ya existe en la plataforma"); }</script>';
+        }else if($_GET['utilizado'] == 2){
+          echo '<script> window.onload=function mensaje(){ alert("La sección introducida no existe"); }</script>';
+        }
       }
-    }
-  ?>
+      //Comprobaciones del campo imagen
+      if(isset($_GET['error'])){
+        switch($_GET['error']){
+          case 1:
+            echo '<script> alert("Error más de un elemento seleccionado, o no definido en la selección de imagen"); </script>';
+          break;
+  
+          case 2:
+            echo '<script> alert("Documento no seleccionado en la selección de imagen"); </script>';
+          break;
+          case 3:
+            echo '<script> alert("Error supera el tamaño límite en la selección de imagen"); </script>';
+          break;
+  
+          case 4:
+            echo '<script> alert("Algún error ocurrió en la selección de imagen"); </script>';
+          break;
+  
+          default:
+            echo '<script> alert("Error no es una imagen"); </script>';
+          
+        }
+      }
+    ?>
   </head>
 
   <body>
@@ -33,7 +57,6 @@
         <h1 id="tituloCabecera">
           <?php 
             if(isset($_GET['bd'])){
-              require_once("tratamientoCadenas.php"); 
               echo $_GET['bd']; 
             }  
           ?>
@@ -68,7 +91,7 @@
           try{
             $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+            $sentencia->bindValue(":nombrebd",$_GET["bd"]);
             $sentencia->execute();
   
             $resultado = $sentencia->fetchAll();

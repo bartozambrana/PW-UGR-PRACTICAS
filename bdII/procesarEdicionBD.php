@@ -3,11 +3,10 @@
     //Establecimiento de los ficheros necesarios:
     require_once("configuracion.php");
     require_once("conexion.php");
-    require_once("tratamientoCadenas.php");
     //Establecimiento de variables
-    $bd = quitarAcentos($_POST["nombreBD"]);
+    $bd = $_POST["nombreBD"];
     $descripcion = $_POST["Descripcion"];
-    $descripcion = quitarAcentos($descripcion);
+    $descripcion = $descripcion;
     $fechaFinalizacion  =$_POST["fechaFinalizacionAlta"];
     echo $descripcion . '<br> ' . $fechaFinalizacion . '<br> ' . $bd . '<br> ';
     //Realización de la actualización

@@ -69,24 +69,28 @@
               }
               require_once("configuracion.php");
               require_once("conexion.php");
-              require_once("tratamientoCadenas.php");
               try{
                 $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+                $sentencia->bindValue(":nombrebd",$_GET["bd"]);
                 $sentencia->execute();
 
-                $resultado = $sentencia->fetchAll();
-                foreach($resultado as $fila){
-                  echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '&empieza=0' .'" class="enlace1">' . $fila['nombre'] . '</a>';
-
-                }
+                
                 
               }catch(PDOException $e){
                 echo $e;
                 $conexion = null;
+                die();
               }
-                
+              
+              $resultado = $sentencia->fetchAll();
+              foreach($resultado as $fila){
+                  echo '<a href="./recursosseccion1.php?bd='. $_GET["bd"]. '&seccion='. $fila['nombre'] . '&empieza=0' .'" class="enlace1">' . $fila['nombre'] . '</a>';
+
+              }
+              
+              $nSecciones = count($resultado);
+
             ?>
 
       </nav>
@@ -106,11 +110,11 @@
               try{
                 $sql = "SELECT descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombre",quitarAcentos($_GET["bd"]) );
+                $sentencia->bindValue(":nombre",$_GET["bd"]);
                 $sentencia->execute();
 
                 $resultado = $sentencia->fetch();
-                echo quitarAcentos($resultado['descripcion']);
+                echo $resultado['descripcion'];
                 
               }catch(PDOException $e){
                 echo $e;
@@ -133,13 +137,14 @@
             //Código de extracción de los ultimos 3 recursos de la biblioteca digital de la base de datos
             try{
               //Escogemos los recursos pertenecientes a la bilioteca digital que nos encontramos y contamos los recursos, puesto que nos serviran posteriormente
-              $sql = "SELECT recursos.urlImagen, recursos.nombre, recursos.seccion FROM recursos, secciones WHERE secciones.nombrebd = :bd AND secciones.nombre = recursos.seccion";
+              $sql = "SELECT recursos.urlImagen, recursos.nombre, recursos.seccion FROM recursos, secciones WHERE secciones.nombrebd = :bd AND recursos.seccion = secciones.nombre";
               $sentencia = $conexion->prepare($sql);
-              $sentencia->bindValue(":bd",quitarAcentos($_GET["bd"]) );
+              $sentencia->bindValue(":bd",$_GET["bd"] );
               $sentencia->execute();
 
               $resultado = $sentencia->fetchAll();
               $contador = 0;
+              //Mostramos los últimos 3 recursos de la consulta obtenida, como recursos destacados
               for($i = count($resultado) -1; $i >= 0 && $contador < 3; $i--){
                 echo ' <section class="Cuadro50BordeMargenIzquierdo">
                           <article class="apilamiento2Secciones">
@@ -174,25 +179,47 @@
                   '<p class="relevante" id="informacionGeneralColeccion">' . 
                     'N&uacute;mero de recursos: ' . count($resultado) . '<br><br>' ;
                     if(count($resultado) == 0){
-                      echo '&Uacute;ltima publicaci&oacute;n: No se encuentra publicado nada a&uacute;n.';
+                      echo '&Uacute;ltima publicaci&oacute;n: No se encuentra publicado nada a&uacute;n. <br><br>';
                     }else{
-                      echo '&Uacute;ltima publicaci&oacute;n: '. $resultado[count($resultado) -1]['nombre'];
+                      echo '&Uacute;ltima publicaci&oacute;n: '. $resultado[count($resultado) -1]['nombre'].' <br><br>';
                     }
                     echo 'Fuentes de datos: Plataforma Netflix. <br><br>' . 
                   '</p>' .
                 '</article>';
+          //Si el usuario está logueado
           if(isset($_SESSION['usuario'])){
-            echo '<aside>' . 
-                    '<a href="altarecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
-                    <a href="borrarrecursos.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
-                    <a href="editarrecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
-                    (Recursos)
-                    <br><br><br>
-                    <a href="altaseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
-                    <a href="borrarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
-                    <a href="editarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
+            //Si no hay secciones, se muestra solo la alta de secciones
+            if($nSecciones == 0){
+              echo '<aside>' . 
+                    '<a href="altaseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
                     (Secciones)
-                </aside>';
+                  </aside>';
+            }else{
+              //Si hay secciones definidas pero no recursos, solo se muestra la alta de recursos, en caso contrario se muestra todo.
+              echo '<aside>';
+              if(count($resultado) == 0){
+                echo '<a href="altarecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                      (Recursos)
+                      <br><br><br>
+                      <a href="altaseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                      <a href="borrarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
+                      <a href="editarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
+                      (Secciones)
+                    </aside>';
+              }else{
+                echo '<a href="altarecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                      <a href="borrarrecursos.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
+                      <a href="editarrecurso.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
+                      (Recursos)
+                      <br><br><br>
+                      <a href="altaseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Alta</a>
+                      <a href="borrarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Baja</a>
+                      <a href="editarseccion.php?bd='. $_GET['bd'] .'" class="enlace1">Editar</a>
+                      (Secciones)
+                  </aside>';
+              }
+                    
+            }
           } 
                 
                 

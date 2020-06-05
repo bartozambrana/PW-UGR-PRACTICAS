@@ -4,7 +4,6 @@
     // u otra va a ser utilizado.
     require_once("conexion.php");
     require_once("configuracion.php");
-    require_once("tratamientoCadenas.php");
 
 
     if(!isset($_GET['seleccionseccion'])){
@@ -12,7 +11,7 @@
         try{
             $sql = "SELECT nombre FROM ".SECCIONES ." WHERE nombrebd = :bd ";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":bd",quitarAcentos($_GET['bd']) );
+            $sentencia->bindValue(":bd",$_GET['bd'] );
             $sentencia->execute();
         }catch(PDOException $e){
             echo $e;
@@ -53,8 +52,8 @@
             try{
                 $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabajamodificada, fechabaja, descripcion, nombrebd FROM ". SECCIONES ." WHERE nombre = :nombre AND nombrebd = :bd";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombre",quitarAcentos($_GET['seleccionseccion']) );
-                $sentencia->bindValue(":bd",quitarAcentos($_GET['bd']) );
+                $sentencia->bindValue(":nombre",$_GET['seleccionseccion'] );
+                $sentencia->bindValue(":bd",$_GET['bd'] );
                 $sentencia->execute();
             }catch(PDOException $e){
                 echo $e;
@@ -84,7 +83,7 @@
             <legend>Formulario de edici&oacute;n de la secci&oacute;n.</legend>
                          
             <label for="titulo">T&iacute;tulo: *</label>
-            <input type="text" name="titulo" id="titulo" ><br><br>
+            <input type="text" name="titulo" id="titulo" required><br><br>
 
             <label for="fechaFinalizacionAlta">   Fecha de finalizaci&oacute;n *</label>
             <input type="date" id="fechaFinalizacionAlta" name="fechaFinalizacionAlta" value="'. $resultado['fechabaja'] .'" /><br><br>

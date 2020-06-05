@@ -1,6 +1,5 @@
 <?php 
     //Obtenemos todos los valores
-    require_once("tratamientoCadenas.php");
     require_once("configuracion.php");
     require_once("conexion.php");
 
@@ -12,8 +11,8 @@
     try{
         $sql = "SELECT nombre FROM " . SECCIONES ." WHERE nombre = :seccion AND nombrebd = :bd";
         $sentencia = $conexion->prepare($sql);
-        $sentencia->bindValue(":seccion",quitarAcentos($nombreSeccion));
-        $sentencia->bindValue(":bd",quitarAcentos($bd));
+        $sentencia->bindValue(":seccion",$nombreSeccion);
+        $sentencia->bindValue(":bd",$bd);
         $sentencia->execute();
     }catch(PDOException $e){
         echo $e ;
@@ -27,8 +26,8 @@
         try{
             $sql = "DELETE ". SECCIONES .".* FROM " . SECCIONES ." WHERE nombre = :seccion AND nombrebd = :bd";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":seccion",quitarAcentos($nombreSeccion));
-            $sentencia->bindValue(":bd",quitarAcentos($bd));
+            $sentencia->bindValue(":seccion",$nombreSeccion);
+            $sentencia->bindValue(":bd",$bd);
             $sentencia->execute();
             $conexion = null;
     

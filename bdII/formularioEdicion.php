@@ -4,7 +4,6 @@
     // u otra va a ser utilizado.
     require_once("conexion.php");
     require_once("configuracion.php");
-    require_once("tratamientoCadenas.php");
 
 
     if(!isset($_GET['recursoseleccionado'])){
@@ -12,7 +11,7 @@
         try{
             $sql = "SELECT recursos.nombre FROM ".RECURSOS .", ". SECCIONES ." WHERE secciones.nombrebd = :bd AND recursos.seccion = secciones.nombre";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":bd",quitarAcentos($_GET['bd']) );
+            $sentencia->bindValue(":bd",$_GET['bd'] );
             $sentencia->execute();
         }catch(PDOException $e){
             echo $e;
@@ -33,7 +32,7 @@
             }
         echo '</datalist>
             <label for="recurso">Recurso *</label>
-            <input type="text" name="recurso" id="recurso" list="seleccionRecurso" required>
+            <input type="text" name="recurso" id="recurso" list="seleccionRecurso">
             
             <input type="hidden" name="bd" id="bd" value="'. $_GET['bd'] .'">
             </fieldset>
@@ -51,7 +50,7 @@
             try{
                 $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabajamodificada, fechabaja, seccion, descripcion, resumen, urlImagen FROM ".RECURSOS ." WHERE nombre = :nombre";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombre",quitarAcentos($_GET['recursoseleccionado']) );
+                $sentencia->bindValue(":nombre",$_GET['recursoseleccionado'] );
                 $sentencia->execute();
             }catch(PDOException $e){
                 echo $e;
@@ -94,7 +93,7 @@
             <article class="apilamiento2Secciones">
                 
                 <label for="titulo">T&iacute;tulo: *</label>
-                <input type="text" name="titulo" id="titulo" required><br><br>
+                <input type="text" name="titulo" id="titulo"><br><br>
 
                 <datalist id="seleccionSeccion">';
 
@@ -102,7 +101,7 @@
                 try{
                     $sql = "SELECT nombre FROM ".SECCIONES ." WHERE nombrebd = :bd";
                     $sentencia = $conexion->prepare($sql);
-                    $sentencia->bindValue(":bd",quitarAcentos($_GET['bd']) );
+                    $sentencia->bindValue(":bd",$_GET['bd'] );
                     $sentencia->execute();
                 }catch(PDOException $e){
                     echo $e;

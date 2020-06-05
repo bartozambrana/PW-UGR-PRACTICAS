@@ -2,15 +2,15 @@
     //Obtenemos los ficheros necesarios: 
     require_once("configuracion.php");
     require_once("conexion.php");
-    require_once("tratamientoCadenas.php");
     //Definimos las variables.
     $recursoSeleccionado = $_POST['recurso'] ;
     $bd = $_POST['bd'];
     //Comprobamos que no se haya introducido un recurso que no aparece en la lista.
     try{
-        $sql = "SELECT nombre FROM ". RECURSOS . " WHERE nombre = :nombre";
+        $sql = "SELECT recursos.nombre FROM ". RECURSOS . ", ". BIBLIOTECAS_DIGITALES ." WHERE recursos.nombre = :nombre AND bd1.nombre = :bd ";
         $sentencia = $conexion->prepare($sql);
-        $sentencia->bindValue(":nombre",quitarAcentos($recursoSeleccionado));
+        $sentencia->bindValue(":nombre",$recursoSeleccionado);
+        $sentencia->bindValue(":bd",$bd);
         $sentencia->execute();
     }catch(PDOException $e){
         echo $e;

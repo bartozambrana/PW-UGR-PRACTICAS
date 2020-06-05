@@ -47,11 +47,11 @@
         <?php 
           require_once("configuracion.php");
           require_once("conexion.php");
-          require_once("tratamientoCadenas.php");
+
 
           $sql = "SELECT nombre, date_format(fechaalta,'%d/%m/%Y') fechaalta, date_format(fechabaja, '%d/%m/%Y') fechabaja, descripcion FROM ".BIBLIOTECAS_DIGITALES ." WHERE nombre = :nombre";
           $sentencia = $conexion->prepare($sql);
-          $sentencia->bindValue(":nombre",quitarAcentos($_GET["bibliotecaBorrar"]) );
+          $sentencia->bindValue(":nombre",$_GET["bibliotecaBorrar"] );
           $sentencia->execute();
 
           $resultado = $sentencia->fetchAll();
@@ -78,7 +78,7 @@
           <textarea rows="8" cols="80" id="motivoDeBorrado"></textarea>
           
           <!-- Para saber que biblioteca hay que -->
-          <input type="hidden" name="nombreBD" id="nombreBD" value="<?php echo quitarAcentos($_GET["bibliotecaBorrar"]); ?>">
+          <input type="hidden" name="nombreBD" id="nombreBD" value="<?php echo $_GET["bibliotecaBorrar"]; ?>">
 
           <input type="submit" name="Enviar" class="boton">
           <input type="reset" name="Reset" class="boton">

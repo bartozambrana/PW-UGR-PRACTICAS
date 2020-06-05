@@ -1,6 +1,5 @@
 <?php 
     //Obtenemos todos los valores
-    require_once("tratamientoCadenas.php");
     require_once("configuracion.php");
     require_once("conexion.php");
     //Creamos las variables necesarias:
@@ -11,7 +10,7 @@
     try{
         $sql = "SELECT nombre FROM " . RECURSOS . " WHERE nombre = :nombre";
         $sentencia = $conexion->prepare($sql);
-        $sentencia->bindValue(":nombre",quitarAcentos($nombreRecurso));
+        $sentencia->bindValue(":nombre",$nombreRecurso);
         $sentencia->execute();
     }catch(PDOException $e){
         echo $e;
@@ -25,7 +24,7 @@
         try{
             $sql = "DELETE ". RECURSOS .".* FROM " . RECURSOS ." WHERE nombre = :nombre";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":nombre",quitarAcentos($_POST['recurso']));
+            $sentencia->bindValue(":nombre",$_POST['recurso']);
             $sentencia->execute();
             $conexion = null;
     

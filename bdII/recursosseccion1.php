@@ -25,8 +25,7 @@
         <section class="encabezado">
             <h1 id="tituloCabecera">
             <?php 
-                require_once("tratamientoCadenas.php");
-                echo quitarAcentos($_GET["bd"]);
+                echo $_GET["bd"];
             ?>
         </h1>
         </section>
@@ -58,7 +57,7 @@
               try{
                 $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
                 $sentencia = $conexion->prepare($sql);
-                $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+                $sentencia->bindValue(":nombrebd",$_GET["bd"] );
                 $sentencia->execute();
 
                 $resultado = $sentencia->fetchAll();
@@ -76,7 +75,7 @@
 
         </nav>
 
-        <h2 id="tituloMenuSecciones"><?php echo quitarAcentos($_GET['seccion']); ?></h2>
+        <h2 id="tituloMenuSecciones"><?php echo $_GET['seccion']; ?></h2>
 
         <!-- sección general de mostrado de elementos -->
        
@@ -86,8 +85,8 @@
                   //Escogemos los recursos pertenecientes a la bilioteca digital que nos encontramos y contamos los recursos, puesto que nos serviran posteriormente
                   $sql = "SELECT recursos.nombre, recursos.descripcion FROM recursos, secciones WHERE secciones.nombrebd = :bd AND recursos.seccion = :nombreseccion AND recursos.seccion = secciones.nombre";
                   $sentencia = $conexion->prepare($sql);
-                  $sentencia->bindValue(":bd",quitarAcentos($_GET["bd"]) );
-                  $sentencia->bindValue(":nombreseccion",quitarAcentos($_GET["seccion"]) );
+                  $sentencia->bindValue(":bd",$_GET["bd"] );
+                  $sentencia->bindValue(":nombreseccion",$_GET["seccion"] );
                   $sentencia->execute();
     
                   
@@ -101,6 +100,7 @@
                 $contador = 0;
                 $t = 0;
                 echo '<section class="tablegen"> ';
+                //Elaboración de la zona central de mostrado.
                 for( $i = intval($_GET['empieza']) ; $i < count($resultado) && $t < 9 ; $i++ ){
                   if($contador == 0){
                     echo '<section class="fila">';
@@ -110,7 +110,7 @@
                     <article class="columna">
                         <a href="./recurso.php?recurso='. $resultado[$i]['nombre'] . '&seccion='. $_GET['seccion']. '&bd=' . $_GET["bd"]  .'" class="enlace5">' . $resultado[$i]['nombre'] . '</a>
                         <p class="relevante"> '
-                          . quitarAcentos($resultado[$i]['descripcion']) .
+                          . $resultado[$i]['descripcion'] .
                         '</p>
                     </article>';
                   $contador++;
@@ -119,13 +119,15 @@
                       echo '</section>';
                       $contador = 0;
                   }
-                }                                   
+                }
+                //Caso de que por ejemplo haya o dos recursos como final, han de cerrarse el section al final de recorrer todos los recursos disponibles                                   
                 if($contador < 3 && $contador > 0){
                     echo '</section>';
                 }
 
                 echo '</section>';
                 
+                //Implementación del paso de página.
                 if(count($resultado) > 9){
                   echo ' <nav id="navSecciones"> '; 
                   $k = 1;

@@ -60,11 +60,11 @@
         }
         require_once("configuracion.php");
         require_once("conexion.php");
-        require_once("tratamientoCadenas.php");
+
         try{
           $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
           $sentencia = $conexion->prepare($sql);
-          $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+          $sentencia->bindValue(":nombrebd",$_GET["bd"] );
           $sentencia->execute();
 
           $resultado = $sentencia->fetchAll();

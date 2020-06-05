@@ -18,6 +18,7 @@
   	$sentencia->bindValue(":contrasenia", $contrasenia);
   	$sentencia->execute();
     $resultado = $sentencia->fetch();
+    //Comprobamos si el usuario esta registrado
   	if(!empty($resultado)){
       $_SESSION['usuario'] = $usuario;
       $_SESSION['email'] = $resultado['email'];
@@ -26,6 +27,7 @@
   		header("Location: gestorbd.php");
   	}
   	else{
+      //El usuario no está registrado
       $_SESSION['incorrecto'] = "usuarioIncorrecto";
       header("Location: index.php");
   	}

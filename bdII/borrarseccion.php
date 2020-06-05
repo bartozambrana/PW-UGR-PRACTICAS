@@ -29,9 +29,8 @@
       <section class="encabezado">
         <h1 id="tituloCabecera">
           <?php 
-            require_once("tratamientoCadenas.php");
             if(isset($_GET['bd']))
-              echo quitarAcentos($_GET['bd']); //convertimos una vocal con acento o ñ por &<vocal>acute; o &ntilde;
+              echo $_GET['bd']; //convertimos una vocal con acento o ñ por &<vocal>acute; o &ntilde;
           ?>
         </h1>
       </section>
@@ -64,7 +63,7 @@
             try{
               $sql = "SELECT nombre FROM ". SECCIONES ." WHERE nombrebd = :nombrebd";
               $sentencia = $conexion->prepare($sql);
-              $sentencia->bindValue(":nombrebd",quitarAcentos($_GET["bd"]) );
+              $sentencia->bindValue(":nombrebd",$_GET["bd"] );
               $sentencia->execute();
 
               $resultado = $sentencia->fetchAll();
@@ -90,7 +89,7 @@
           try{
             $sql = "SELECT nombre FROM " . SECCIONES . " WHERE nombrebd = :bd";
             $sentencia = $conexion->prepare($sql);
-            $sentencia->bindValue(":bd", quitarAcentos($_GET['bd']));
+            $sentencia->bindValue(":bd", $_GET['bd']);
             $sentencia->execute();
             //obtenemos todos los resultados.
             $resultado = $sentencia->fetchAll();
